@@ -1,9 +1,11 @@
 package com.vignesh.remainder;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,13 +16,16 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-@RunWith(AndroidJUnit4.class)
+@RunWith(AndroidJUnit4.class) // <-- @RunWith + @BeforeClass = Error
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.vignesh.remainder", appContext.getPackageName());
+    @BeforeClass
+    public static void setup() {
+        // Setting up once before all tests
+    }
+
+    @Test
+    public void testing() {
+        // Testing....
     }
 }
