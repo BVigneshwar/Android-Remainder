@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/notes_tab" android:icon="@drawable/notes_icon" android:title="@string/notes"></item>
+    <item android:id="@+id/reminder_tab" android:icon="@drawable/reminder_icon" android:title="@string/reminder"></item>
+    <item android:id="@+id/todo_tab" android:icon="@drawable/tesk_icon" android:title="@string/task"></item>
+</menu>
