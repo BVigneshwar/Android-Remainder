@@ -13,6 +13,8 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
     static String title = "title";
     static String description = "description";
     static String category = "category";
+    static String created_time = "created_time";
+    static String last_updated = "last_updated";
 
     NotesDatabaseHandler(Context context){
         super(context, DB_name, null, DB_version);
@@ -25,7 +27,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(create_category_table);
         String create_notes_table = "CREATE TABLE " + table + "("
                 + id + " INTEGER PRIMARY KEY," + title + " TEXT,"
-                + description + " TEXT," + category +" INTEGER, FOREIGN KEY("+ category +") REFERENCES category_table(id))";
+                + description + " TEXT," + category +" INTEGER, "+ created_time +" DATETIME, "+ last_updated +" DATETIME, FOREIGN KEY("+ category +") REFERENCES category_table(id))";
         db.execSQL(create_notes_table);
     }
 

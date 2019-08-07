@@ -13,12 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class NotesFragment extends Fragment {
     RecyclerView recyclerView;
+    FloatingActionButton add_notes_btn;
     List<NotesModel> list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,16 +32,25 @@ public class NotesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.notes_recycler_view);
+        add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         list = new ArrayList<>();
-        /*list.add(new NotesModel("Hi", "hello"));
         list.add(new NotesModel("Hi", "hello"));
-        list.add(new NotesModel("Hi", "hello"));*/
+        list.add(new NotesModel("Hi", "hello"));
+        list.add(new NotesModel("Hi", "hello"));
 
         NotesAdapter notesAdapter = new NotesAdapter(getContext(), list);
         recyclerView.setAdapter(notesAdapter);
+
+        add_notes_btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesDetailsFragment()).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
