@@ -1,8 +1,12 @@
 package com.vignesh.remainder;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NotesDatabaseHandler extends SQLiteOpenHelper {
     Context context;
@@ -41,5 +45,18 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + table);
         onCreate(db);
+    }
+
+    boolean insert(String title, String description){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        values.put(NotesDatabaseHandler.title, title);
+        values.put(NotesDatabaseHandler.description, description);
+        values.put(NotesDatabaseHandler.created_time, dateFormat.format(date));
+        values.put(NotesDatabaseHandler.last_updated, dateFormat.format(date));
+        long result = db.insert(table, null, values);
+        return result == -1? false : true;
     }
 }

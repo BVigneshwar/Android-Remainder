@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,10 +23,12 @@ import java.util.List;
 public class NotesFragment extends Fragment {
     RecyclerView recyclerView;
     FloatingActionButton add_notes_btn;
+    NotesDatabaseHandler notesDatabaseHandler;
     List<NotesModel> list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        notesDatabaseHandler = new NotesDatabaseHandler(getContext());
     }
 
     @Override
