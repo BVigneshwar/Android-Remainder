@@ -1,6 +1,7 @@
 package com.vignesh.remainder;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,9 +41,9 @@ public class NotesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         list = new ArrayList<>();
+        /*list.add(new NotesModel("Hi", "hello"));
         list.add(new NotesModel("Hi", "hello"));
-        list.add(new NotesModel("Hi", "hello"));
-        list.add(new NotesModel("Hi", "hello"));
+        list.add(new NotesModel("Hi", "hello"));*/
 
         NotesAdapter notesAdapter = new NotesAdapter(getContext(), list);
         recyclerView.setAdapter(notesAdapter);
@@ -54,6 +55,8 @@ public class NotesFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesDetailsFragment()).addToBackStack(null).commit();
             }
         });
+
+        getAllNotes();
     }
 
     @Override
@@ -61,4 +64,13 @@ public class NotesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_notes, container, false);
     }
 
+    private void getAllNotes(){
+        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
+        Cursor cursor = notesDatabaseHandler.getAllData();
+        if(cursor.getCount() != 0){
+            while (cursor.moveToNext()){
+                list.add(new NotesModel(cursor.getString(1), cursor.getString(2)));
+            }
+        }
+    }
 }

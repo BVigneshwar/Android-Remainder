@@ -2,6 +2,7 @@ package com.vignesh.remainder;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -58,5 +59,11 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         values.put(NotesDatabaseHandler.last_updated, dateFormat.format(date));
         long result = db.insert(table, null, values);
         return result == -1? false : true;
+    }
+
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+table, null);
+        return res;
     }
 }

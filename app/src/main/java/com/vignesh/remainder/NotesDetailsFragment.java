@@ -13,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class NotesDetailsFragment extends Fragment {
 
@@ -35,13 +37,24 @@ public class NotesDetailsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.save_menu){
-
+            saveNotes();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void saveNotes(){
-
+        EditText et_title = (EditText) getView().findViewById(R.id.notes_title);
+        EditText et_description = (EditText) getView().findViewById(R.id.notes_description);
+        String title = et_title.getText().toString();
+        String description = et_description.getText().toString();
+        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
+        if(title.length() > 0 || description.length() > 0){
+            if(notesDatabaseHandler.insert(title, description)){
+                Toast.makeText(getContext(), "Notes Saved", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getContext(), "Error in saving", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
