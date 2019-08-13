@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NotesDetailsFragment extends Fragment {
-
+    String title, description;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_notes_details, container, false);
@@ -26,12 +25,27 @@ public class NotesDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        title = getArguments().getString("title");
+        description = getArguments().getString("description");
         setHasOptionsMenu(true);
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        EditText ed_title = getView().findViewById(R.id.notes_title);
+        EditText ed_description = getView().findViewById(R.id.notes_description);
+        if(title != null){
+            ed_title.setText(title);
+        }
+        if(description != null){
+            ed_description.setText(description);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.save_menu, menu) ;
+        inflater.inflate(R.menu.save_menu, menu);
     }
 
     @Override

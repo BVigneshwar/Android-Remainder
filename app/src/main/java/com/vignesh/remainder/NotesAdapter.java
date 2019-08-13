@@ -1,6 +1,7 @@
 package com.vignesh.remainder;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public void onClick(View v) {
-        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesDetailsFragment()).addToBackStack(null).commit();
+        String title = ((TextView)(v.findViewById(R.id.notes_title))).getText().toString();
+        String description = ((TextView)(v.findViewById(R.id.notes_description))).getText().toString();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("description", description);
+
+        NotesDetailsFragment notesFragment = new NotesDetailsFragment();
+        notesFragment.setArguments(bundle);
+        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesFragment).addToBackStack(null).commit();
     }
 
     class NotesViewHolder extends RecyclerView.ViewHolder{
