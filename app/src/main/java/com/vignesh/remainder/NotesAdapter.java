@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements View.OnClickListener{
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder>{
     Context context;
     List<NotesModel> notes_list;
 
@@ -32,30 +32,30 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
-        NotesModel notes_data = notes_list.get(position);
+    public void onBindViewHolder(@NonNull NotesViewHolder holder, final int position) {
+        final NotesModel notes_data = notes_list.get(position);
         holder.title.setText(notes_data.getTitle());
         holder.description.setText(notes_data.getDescription());
-        holder.cardView.setOnClickListener(this);
+        holder.cardView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String title = notes_list.get(position).getTitle();
+                String description = notes_list.get(position).getDescription();
+                int id = notes_list.get(position).getId();
+                Bundle bundle = new Bundle();
+                bundle.putString("title", title);
+                bundle.putString("description", description);
+                bundle.putInt("id", id);
+                NotesDetailsFragment notesFragment = new NotesDetailsFragment();
+                notesFragment.setArguments(bundle);
+                ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesFragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return notes_list.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-        String title = ((TextView)(v.findViewById(R.id.notes_title))).getText().toString();
-        String description = ((TextView)(v.findViewById(R.id.notes_description))).getText().toString();
-
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        bundle.putString("description", description);
-
-        NotesDetailsFragment notesFragment = new NotesDetailsFragment();
-        notesFragment.setArguments(bundle);
-        ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesFragment).addToBackStack(null).commit();
     }
 
     class NotesViewHolder extends RecyclerView.ViewHolder{

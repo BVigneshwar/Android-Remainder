@@ -16,7 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NotesDetailsFragment extends Fragment {
-    String title, description;
+    String retrieved_title, retrieved_description;
+    int retrieved_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_notes_details, container, false);
@@ -25,8 +26,9 @@ public class NotesDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString("title");
-        description = getArguments().getString("description");
+        retrieved_title = getArguments().getString("title");
+        retrieved_description = getArguments().getString("description");
+        retrieved_id = getArguments().getInt("id");
         setHasOptionsMenu(true);
     }
 
@@ -35,11 +37,11 @@ public class NotesDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         EditText ed_title = getView().findViewById(R.id.notes_title);
         EditText ed_description = getView().findViewById(R.id.notes_description);
-        if(title != null){
-            ed_title.setText(title);
+        if(retrieved_title != null){
+            ed_title.setText(retrieved_title);
         }
-        if(description != null){
-            ed_description.setText(description);
+        if(retrieved_description != null){
+            ed_description.setText(retrieved_description);
         }
     }
 
@@ -63,11 +65,15 @@ public class NotesDetailsFragment extends Fragment {
         String title = et_title.getText().toString();
         String description = et_description.getText().toString();
         NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        if(title.length() > 0 || description.length() > 0){
-            if(notesDatabaseHandler.insert(title, description)){
-                Toast.makeText(getContext(), "Notes Saved", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(getContext(), "Error in saving", Toast.LENGTH_SHORT).show();
+        if(retrieved_id > -1){
+
+        }else{
+            if(title.length() > 0 || description.length() > 0){
+                if(notesDatabaseHandler.insert(title, description)){
+                    Toast.makeText(getContext(), "Notes Saved", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Error in saving", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

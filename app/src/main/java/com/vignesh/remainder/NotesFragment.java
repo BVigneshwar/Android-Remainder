@@ -69,7 +69,7 @@ public class NotesFragment extends Fragment {
         Cursor cursor = notesDatabaseHandler.getAllData();
         if(cursor.getCount() != 0){
             while (cursor.moveToNext()){
-                list.add(new NotesModel(cursor.getString(1), cursor.getString(2)));
+                list.add(new NotesModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2)));
             }
         }
     }

@@ -6,7 +6,8 @@ public class NotesModel {
     private String description;
     private String category;
 
-    NotesModel(String title, String description){
+    NotesModel(int id, String title, String description){
+        this.id = id;
         this.title = title;
         this.description = description;
     }
