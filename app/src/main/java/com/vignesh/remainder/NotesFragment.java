@@ -45,14 +45,20 @@ public class NotesFragment extends Fragment {
         list.add(new NotesModel("Hi", "hello"));
         list.add(new NotesModel("Hi", "hello"));*/
 
-        NotesAdapter notesAdapter = new NotesAdapter(getContext(), list);
+        final NotesAdapter notesAdapter = new NotesAdapter(getContext(), list);
         recyclerView.setAdapter(notesAdapter);
 
         add_notes_btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesDetailsFragment()).addToBackStack(null).commit();
+                NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("title", null);
+                bundle.putString("description", null);
+                bundle.putInt("id", 0);
+                notesDetailsFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack(null).commit();
             }
         });
 

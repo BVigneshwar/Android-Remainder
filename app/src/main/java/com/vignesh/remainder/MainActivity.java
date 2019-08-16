@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
                     case R.id.notes_tab :
-                        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout, new NotesFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesFragment()).commit();
                 }
                 return true;
             }

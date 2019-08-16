@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NotesDetailsFragment extends Fragment {
-    String retrieved_title, retrieved_description;
-    int retrieved_id;
+    String selected_title, selected_description;
+    int selected_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_notes_details, container, false);
@@ -26,9 +26,9 @@ public class NotesDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        retrieved_title = getArguments().getString("title");
-        retrieved_description = getArguments().getString("description");
-        retrieved_id = getArguments().getInt("id");
+        selected_title = getArguments().getString("title");
+        selected_description = getArguments().getString("description");
+        selected_id = getArguments().getInt("id");
         setHasOptionsMenu(true);
     }
 
@@ -37,11 +37,11 @@ public class NotesDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         EditText ed_title = getView().findViewById(R.id.notes_title);
         EditText ed_description = getView().findViewById(R.id.notes_description);
-        if(retrieved_title != null){
-            ed_title.setText(retrieved_title);
+        if(selected_title != null){
+            ed_title.setText(selected_title);
         }
-        if(retrieved_description != null){
-            ed_description.setText(retrieved_description);
+        if(selected_title != null){
+            ed_description.setText(selected_description);
         }
     }
 
@@ -65,8 +65,14 @@ public class NotesDetailsFragment extends Fragment {
         String title = et_title.getText().toString();
         String description = et_description.getText().toString();
         NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        if(retrieved_id > -1){
-
+        if(selected_id > 0){
+            if(title.length() > 0 || description.length() > 0){
+                if(notesDatabaseHandler.update(selected_id, title, description)){
+                    Toast.makeText(getContext(), "Notes Edited", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Error in editing", Toast.LENGTH_SHORT).show();
+                }
+            }
         }else{
             if(title.length() > 0 || description.length() > 0){
                 if(notesDatabaseHandler.insert(title, description)){

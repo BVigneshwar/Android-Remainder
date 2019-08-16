@@ -28,7 +28,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_category_table = "CREATE TABLE category_table (id INTEGER PRIMARY KEY, name TEXT);";
+        String create_category_table = "CREATE TABLE category_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT);";
         db.execSQL(create_category_table);
         String create_notes_table = "CREATE TABLE " + table + "("
                 + id + " INTEGER PRIMARY KEY," + title + " TEXT,"
@@ -61,6 +61,14 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         return result == -1? false : true;
     }
 
+    boolean update(int id, String title, String description){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NotesDatabaseHandler.title, title);
+        values.put(NotesDatabaseHandler.description, description);
+        int result = db.update(table, values, "id = ?", new String[]{String.valueOf(id)});
+        return result == -1 ? false : true;
+    }
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+table, null);
