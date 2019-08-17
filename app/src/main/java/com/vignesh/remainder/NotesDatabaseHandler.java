@@ -74,4 +74,9 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from "+table, null);
         return res;
     }
+    public boolean deleteNotes(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(table, "id = ?", new String[]{ String.valueOf(id)});
+        return result == -1 ? false : true;
+    }
 }
