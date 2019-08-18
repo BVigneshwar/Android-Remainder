@@ -62,13 +62,13 @@ public class NotesFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
+                NotesEditFragment notesEditFragment = new NotesEditFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("title", null);
                 bundle.putString("description", null);
                 bundle.putInt("id", 0);
-                notesDetailsFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack(null).commit();
+                notesEditFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack(null).commit();
             }
         });
 

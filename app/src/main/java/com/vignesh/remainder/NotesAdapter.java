@@ -54,9 +54,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     bundle.putString("title", title);
                     bundle.putString("description", description);
                     bundle.putInt("id", id);
-                    NotesDetailsFragment notesFragment = new NotesDetailsFragment();
-                    notesFragment.setArguments(bundle);
-                    ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesFragment).addToBackStack(null).commit();
+                    NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
+                    notesDetailsFragment.setArguments(bundle);
+                    ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack(null).commit();
                 }
             }
         });
