@@ -4,12 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".NotesDetailsFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Uncategorised"
+        android:background="@drawable/category_button"/>
 
     <TextView
         android:id="@+id/tv_notes_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:hint="@string/title"/>
 
     <TextView
@@ -17,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
+        android:textSize="14sp"
         android:hint="@string/notes"/>
 
 </LinearLayout>
