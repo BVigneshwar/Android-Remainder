@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,12 +38,20 @@ public class NotesEditFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         EditText et_title = getView().findViewById(R.id.et_notes_title);
         EditText et_description = getView().findViewById(R.id.et_notes_description);
+        Button category_button = getView().findViewById(R.id.category_button);
+
         if(selected_title != null){
             et_title.setText(selected_title);
         }
         if(selected_title != null){
             et_description.setText(selected_description);
         }
+        category_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, new CategoryFragment()).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

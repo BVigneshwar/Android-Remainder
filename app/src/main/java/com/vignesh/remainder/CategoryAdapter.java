@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     Context context;
@@ -29,10 +28,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+        holder.category_title.setText(category_list.get(position).getTitle());
         holder.category_list_container.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
@@ -43,11 +43,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder{
-        TextView title;
+        TextView category_title;
         ViewGroup category_list_container;
         public CategoryViewHolder(View view){
             super(view);
-            title = view.findViewById(R.id.category_title);
+            category_title = view.findViewById(R.id.category_title);
             category_list_container = view.findViewById(R.id.category_list_container);
         }
     }

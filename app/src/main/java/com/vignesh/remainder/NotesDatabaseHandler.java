@@ -28,7 +28,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_category_table = "CREATE TABLE category_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT);";
+        String create_category_table = "CREATE TABLE category_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, color TEXT);";
         db.execSQL(create_category_table);
         String create_notes_table = "CREATE TABLE " + table + "("
                 + id + " INTEGER PRIMARY KEY," + title + " TEXT,"
