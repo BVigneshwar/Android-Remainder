@@ -1,9 +1,12 @@
 package com.vignesh.remainder;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,12 +30,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
         holder.category_title.setText(category_list.get(position).getTitle());
         holder.category_list_container.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                if(position == 0){
+                    Dialog dialog = new Dialog(context, R.style.dialog_style);
+                    dialog.setContentView(R.layout.category_dialog);
+                    dialog.setTitle(context.getResources().getString(R.string.add_category));
+                    GridView color_gridview = dialog.findViewById(R.id.color_gridview);
+                    color_gridview.setAdapter(new ColorGridViewAdapter(context, AppConstants.category_color_list));
+                    dialog.show();
+                }
             }
         });
     }
