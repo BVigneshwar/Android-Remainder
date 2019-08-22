@@ -11,7 +11,7 @@
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:textColorSecondary">@color/colorPrimary</item>
     </style>
-    <style name="dialog_style" parent="Theme.AppCompat.Dialog">
+    <style name="dialog_style" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">false</item>
         <item name="android:windowIsFloating">true</item>
     </style>

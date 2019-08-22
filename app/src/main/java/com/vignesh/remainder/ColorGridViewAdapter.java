@@ -35,10 +35,12 @@ public class ColorGridViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null){
-            convertView = new ImageButton(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            convertView = layoutInflater.inflate(R.layout.color_round_button, null);
         }
-        convertView.setBackgroundColor(context.getColor(color_list[position]));
-        convertView.setLayoutParams(new ViewGroup.LayoutParams(80, 80));
+        //convertView.setBackground(context.getDrawable(R.drawable.color_round_button));
+        //convertView.setBackgroundColor(context.getColor(color_list[position]));
+        //convertView.setLayoutParams(new ViewGroup.LayoutParams( 100, 100));
         return convertView;
     }
 }
