@@ -21,6 +21,8 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
     static String created_time = "created_time";
     static String last_updated = "last_updated";
 
+    static String category_table = "category_table";
+
     NotesDatabaseHandler(Context context){
         super(context, DB_name, null, DB_version);
         this.context = context;
@@ -78,5 +80,14 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         int result = db.delete(table, "id = ?", new String[]{ String.valueOf(id)});
         return result == -1 ? false : true;
+    }
+
+    public boolean insertCategory(String title, String color){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", title);
+        values.put("color", color);
+        long res = db.insert(category_table, null, values);
+        return res == -1? false : true;
     }
 }

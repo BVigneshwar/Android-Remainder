@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +51,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     layoutParams.copyFrom(dialog.getWindow().getAttributes());
                     layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
                     dialog.getWindow().setAttributes(layoutParams);
+                    color_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            EditText et_category_title = view.findViewById(R.id.et_category_title);
+                            String title = et_category_title.getText().toString();
+                            NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(context);
+                            if(notesDatabaseHandler.insertCategory(title, "#FFFFFF"))
+                                Toast.makeText(context, "Category added successfully", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(context, "category addition failed", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }
             }
         });
