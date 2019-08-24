@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
@@ -38,9 +41,17 @@ public class ColorGridViewAdapter extends BaseAdapter {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.color_round_button, null);
         }
-        //convertView.setBackground(context.getDrawable(R.drawable.color_round_button));
-        //convertView.setBackgroundColor(context.getColor(color_list[position]));
-        //convertView.setLayoutParams(new ViewGroup.LayoutParams( 100, 100));
+        ImageButton color_button = (ImageButton) convertView.findViewById(R.id.round_color_button);
+        final ImageView color_selector = (ImageView) convertView.findViewById(R.id.selector);
+
+        color_button.setBackground(context.getDrawable(color_list[position]));
+        final View finalConvertView = convertView;
+        color_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                color_selector.setVisibility(View.VISIBLE);
+            }
+        });
         return convertView;
     }
 }

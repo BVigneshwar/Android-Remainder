@@ -3,11 +3,20 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#008577</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="red">#FF0000</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="green">#00FF00</color>
-    <color name="purple">#FF00FF</color>
-    <color name="blue">#0000FF</color>
+
+    <!-- category color -->
+    <color name="red">#c62828</color>
+    <color name="pink">#f06292</color>
+    <color name="purple">#ab47bc</color>
+    <color name="blue">#1976d2</color>
+    <color name="cyan">#0097a7</color>
+    <color name="green">#43a047</color>
+    <color name="yellow">#ffeb3b</color>
+    <color name="orange">#fb8c00</color>
+    <color name="brown">#795548</color>
+    <color name="grey">#9e9e9e</color>
+
 </resources>

@@ -44,7 +44,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     dialog.setContentView(R.layout.category_dialog);
                     dialog.setTitle(context.getResources().getString(R.string.add_category));
                     GridView color_gridview = dialog.findViewById(R.id.color_gridview);
-                    color_gridview.setAdapter(new ColorGridViewAdapter(context, AppConstants.category_color_list));
+                    color_gridview.setAdapter(new ColorGridViewAdapter(context, AppConstants.category_drawable_color_list));
                     dialog.show();
 
                     WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
