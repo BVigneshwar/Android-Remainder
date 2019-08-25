@@ -6,12 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +29,7 @@ public class NotesFragment extends Fragment {
     FloatingActionButton add_notes_btn;
     NotesDatabaseHandler notesDatabaseHandler;
     List<NotesModel> notes_list;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +51,6 @@ public class NotesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         notes_list = new ArrayList<>();
-        /*list.add(new NotesModel("Hi", "hello"));
-        list.add(new NotesModel("Hi", "hello"));
-        list.add(new NotesModel("Hi", "hello"));*/
 
         final NotesAdapter notesAdapter = new NotesAdapter(getContext(), notes_list, this);
         recyclerView.setAdapter(notesAdapter);
@@ -68,7 +64,7 @@ public class NotesFragment extends Fragment {
                 bundle.putString("description", null);
                 bundle.putInt("id", 0);
                 notesEditFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         });
 
@@ -91,10 +87,10 @@ public class NotesFragment extends Fragment {
 
     private void getAllNotes(){
         NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        Cursor cursor = notesDatabaseHandler.getAllData();
+        Cursor cursor = notesDatabaseHandler.getAllNotes();
         if(cursor.getCount() != 0){
             while (cursor.moveToNext()){
-                notes_list.add(new NotesModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2)));
+                notes_list.add(new NotesModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3)));
             }
         }
     }
@@ -110,4 +106,5 @@ public class NotesFragment extends Fragment {
         }
         getFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesFragment()).commit();
     }
+
 }

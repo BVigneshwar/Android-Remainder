@@ -3,6 +3,7 @@
     <string name="notes">Notes</string>
     <string name="task">Task</string>
     <string name="reminder">Reminder</string>
+    <string name="category">Category</string>
 
     <string name="title">Title</string>
     <string name="description">Description</string>

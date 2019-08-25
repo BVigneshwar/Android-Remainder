@@ -4,12 +4,13 @@ public class NotesModel {
     private int id;
     private String title;
     private String description;
-    private String category;
+    private String category_color;
 
-    NotesModel(int id, String title, String description){
+    NotesModel(int id, String title, String description, String category_color){
         this.id = id;
         this.title = title;
         this.description = description;
+        this.category_color = category_color;
     }
 
     public int getId() {
@@ -24,8 +25,8 @@ public class NotesModel {
         return description;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryColor() {
+        return category_color;
     }
 
     public void setId(int id) {
@@ -40,7 +41,7 @@ public class NotesModel {
         this.description = description;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryColor(String category) {
+        this.category_color = category;
     }
 }

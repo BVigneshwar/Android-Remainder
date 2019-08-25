@@ -8,18 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import java.util.List;
 
 public class ColorGridViewAdapter extends BaseAdapter {
     Context context;
     int color_list[];
-    ImageButton imageButton;
-    ColorGridViewAdapter(Context context, int color_list[]){
+    CategoryDialog.CategoryColorSelector categoryColorSelector;
+
+    ColorGridViewAdapter(Context context, int[] color_list, CategoryDialog.CategoryColorSelector categoryColorSelector){
         this.context = context;
         this.color_list = color_list;
+        this.categoryColorSelector = categoryColorSelector;
     }
+
     @Override
     public int getCount() {
         return color_list.length;
@@ -45,10 +46,10 @@ public class ColorGridViewAdapter extends BaseAdapter {
         final ImageView color_selector = (ImageView) convertView.findViewById(R.id.selector);
 
         color_button.setBackground(context.getDrawable(color_list[position]));
-        final View finalConvertView = convertView;
         color_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                CategoryDialog.CategoryColorSelector.onSelect();
                 color_selector.setVisibility(View.VISIBLE);
             }
         });

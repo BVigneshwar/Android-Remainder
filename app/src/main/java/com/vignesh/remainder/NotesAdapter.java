@@ -1,12 +1,14 @@
 package com.vignesh.remainder;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         final NotesModel notes_data = notes_list.get(position);
         holder.title.setText(notes_data.getTitle());
         holder.description.setText(notes_data.getDescription());
+        if(notes_data.getCategoryColor() != null){
+            int color_drawable = AppConstants.color_map.get(notes_data.getCategoryColor());
+            holder.category_color.setBackground(context.getDrawable(color_drawable));
+        }
         holder.cardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -56,7 +62,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     bundle.putInt("id", id);
                     NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
                     notesDetailsFragment.setArguments(bundle);
-                    ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack(null).commit();
+                    ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack("notes_detail").commit();
                 }
             }
         });
@@ -79,7 +85,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         TextView description;
         CardView cardView;
         CheckBox delete_checkbox;
+        ImageView category_color;
         ViewGroup transition_container;
+
         public NotesViewHolder(View view){
             super(view);
             title = view.findViewById(R.id.notes_title);
@@ -87,6 +95,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             cardView = view.findViewById(R.id.notes_cardview);
             delete_checkbox = view.findViewById(R.id.delete_checkbox);
             transition_container = view.findViewById(R.id.transition_container);
+            category_color = view.findViewById(R.id.category_color);
         }
     }
 

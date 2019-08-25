@@ -6,16 +6,19 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".NotesDetailsFragment">
-    <Button
+    <TextView
         android:id="@+id/category_button"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:text="Uncategorised"
         android:textAllCaps="false"
         android:textSize="12sp"
         android:background="@drawable/category_button"/>
+
     <EditText
         android:id="@+id/et_notes_title"
         android:layout_width="match_parent"
