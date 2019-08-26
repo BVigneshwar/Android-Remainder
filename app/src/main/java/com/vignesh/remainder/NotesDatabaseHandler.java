@@ -12,16 +12,19 @@ import java.util.Date;
 public class NotesDatabaseHandler extends SQLiteOpenHelper {
     Context context;
     static String DB_name = "Notes_DB";
-    static int DB_version = 4;
-    static String table = "Notes_table";
+    static int DB_version = 2;
+
+    static String notes_table = "Notes_table";
     static String id = "id";
     static String title = "title";
     static String description = "description";
-    static String category = "category";
+    static String category_id = "category_id";
     static String created_time = "created_time";
     static String last_updated = "last_updated";
 
     static String category_table = "category_table";
+    static String name = "name";
+    static String color = "color";
 
     NotesDatabaseHandler(Context context){
         super(context, DB_name, null, DB_version);
@@ -30,24 +33,24 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_category_table = "CREATE TABLE category_table (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, color TEXT);";
+        String create_category_table = "CREATE TABLE "+category_table+" ("+category_id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+name+" TEXT, "+color+" TEXT);";
         db.execSQL(create_category_table);
-        String create_notes_table = "CREATE TABLE " + table + "("
+        String create_notes_table = "CREATE TABLE " + notes_table + "("
                 + id + " INTEGER PRIMARY KEY," + title + " TEXT,"
-                + description + " TEXT," + category +" INTEGER, "+ created_time +" DATETIME, "+ last_updated +" DATETIME, FOREIGN KEY("+ category +") REFERENCES category_table(id))";
+                + description + " TEXT," + category_id +" INTEGER, "+ created_time +" DATETIME, "+ last_updated +" DATETIME, FOREIGN KEY("+ category_id +") REFERENCES "+category_table+"("+category_id+"))";
         db.execSQL(create_notes_table);
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + table);
+        db.execSQL("DROP TABLE IF EXISTS " + notes_table);
         db.execSQL("DROP TABLE IF EXISTS " + category_table);
         onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + table);
+        db.execSQL("DROP TABLE IF EXISTS " + notes_table);
         db.execSQL("DROP TABLE IF EXISTS " + category_table);
         onCreate(db);
     }
@@ -61,8 +64,8 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         values.put(NotesDatabaseHandler.description, description);
         values.put(NotesDatabaseHandler.created_time, dateFormat.format(date));
         values.put(NotesDatabaseHandler.last_updated, dateFormat.format(date));
-        values.put(NotesDatabaseHandler.category, category);
-        long result = db.insert(table, null, values);
+        values.put(NotesDatabaseHandler.category_id, category);
+        long result = db.insert(notes_table, null, values);
         return result == -1? false : true;
     }
 
@@ -73,19 +76,19 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(NotesDatabaseHandler.title, title);
         values.put(NotesDatabaseHandler.description, description);
-        values.put(NotesDatabaseHandler.category, category);
+        values.put(NotesDatabaseHandler.category_id, category);
         values.put(NotesDatabaseHandler.last_updated, dateFormat.format(date));
-        int result = db.update(table, values, "id = ?", new String[]{String.valueOf(id)});
+        int result = db.update(notes_table, values, "id = ?", new String[]{String.valueOf(id)});
         return result == -1 ? false : true;
     }
     public Cursor getAllNotes(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select Notes_table.id, title, description, color from "+table+" left join "+category_table+" on "+table+"."+category+" = "+category_table+".color", null);
+        Cursor res = db.rawQuery("SELECT "+id+", "+title+", "+description+", "+color+" FROM "+notes_table+" LEFT JOIN "+category_table+" ON "+notes_table+"."+category_id+" = "+category_table+"."+category_id, null);
         return res;
     }
     public boolean deleteNotes(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        int result = db.delete(table, "id = ?", new String[]{ String.valueOf(id)});
+        int result = db.delete(notes_table, "id = ?", new String[]{ String.valueOf(id)});
         return result == -1 ? false : true;
     }
 
@@ -106,7 +109,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
 
     public Cursor getCategory(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select id, name, color from "+category_table+" where id = ?", new String[]{ String.valueOf(id)});
+        Cursor res = db.rawQuery("select "+category_id+", "+name+", "+color+" from "+category_table+" where "+category_id+" = ?", new String[]{ String.valueOf(id)});
         return res;
     }
 }
