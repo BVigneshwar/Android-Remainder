@@ -24,7 +24,8 @@
         android:id="@+id/tv_notes_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size"
         android:textStyle="bold"
         android:hint="@string/title"/>
 
@@ -33,7 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size"
+        android:layout_marginTop="10dp"
         android:hint="@string/notes"/>
 
 </LinearLayout>

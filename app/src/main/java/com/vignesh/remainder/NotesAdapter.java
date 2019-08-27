@@ -53,13 +53,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 if(holder.delete_checkbox.getVisibility() == View.VISIBLE){
                     holder.delete_checkbox.setChecked(true);
                 }else{
-                    String title = notes_list.get(position).getTitle();
-                    String description = notes_list.get(position).getDescription();
-                    int id = notes_list.get(position).getId();
                     Bundle bundle = new Bundle();
-                    bundle.putString("title", title);
-                    bundle.putString("description", description);
-                    bundle.putInt("id", id);
+                    bundle.putString("title", notes_list.get(position).getTitle());
+                    bundle.putString("description", notes_list.get(position).getDescription());
+                    bundle.putInt("id", notes_list.get(position).getId());
+                    bundle.putInt("category_id", notes_list.get(position).getCategory_id());
+                    bundle.putString("category_name", notes_list.get(position).getCategory_name());
+                    bundle.putString("category_color", notes_list.get(position).getCategory_color());
+
                     NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
                     notesDetailsFragment.setArguments(bundle);
                     ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack("notes_detail").commit();

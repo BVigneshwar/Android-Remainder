@@ -75,8 +75,7 @@ public class CategoryDialog {
                     else
                         Toast.makeText(context, "category addition failed", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    ((AppCompatActivity)context).getSupportFragmentManager().popBackStack();
-
+                    ((CategoryActivity)context).fetchAndRenderCategoryList();
                 }
             }
         });

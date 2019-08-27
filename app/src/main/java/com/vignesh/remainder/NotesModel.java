@@ -5,11 +5,15 @@ public class NotesModel {
     private String title;
     private String description;
     private String category_color;
+    private String category_name;
+    private int category_id;
 
-    NotesModel(int id, String title, String description, String category_color){
+    NotesModel(int id, String title, String description, int category_id, String category_name, String category_color){
         this.id = id;
         this.title = title;
         this.description = description;
+        this.category_id = category_id;
+        this.category_name = category_name;
         this.category_color = category_color;
     }
 
@@ -29,19 +33,9 @@ public class NotesModel {
         return category_color;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getCategory_color() { return category_color; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getCategory_name() { return category_name; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCategoryColor(String category) {
-        this.category_color = category;
-    }
+    public int getCategory_id() { return category_id; }
 }

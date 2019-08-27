@@ -83,7 +83,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
     }
     public Cursor getAllNotes(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT "+id+", "+title+", "+description+", "+color+" FROM "+notes_table+" LEFT JOIN "+category_table+" ON "+notes_table+"."+category_id+" = "+category_table+"."+category_id, null);
+        Cursor res = db.rawQuery("SELECT "+id+", "+title+", "+description+", "+notes_table+"."+category_id+", "+name+", "+color+" FROM "+notes_table+" LEFT JOIN "+category_table+" ON "+notes_table+"."+category_id+" = "+category_table+"."+category_id, null);
         return res;
     }
     public boolean deleteNotes(int id){
