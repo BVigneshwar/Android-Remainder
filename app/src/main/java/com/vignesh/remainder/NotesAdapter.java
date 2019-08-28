@@ -1,21 +1,17 @@
 package com.vignesh.remainder;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.vignesh.remainder.databinding.NotesCardviewBinding;
 
 import java.util.List;
 
@@ -34,46 +30,21 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.layout_notes_cardview, null);
-        return new NotesViewHolder(view);
+        NotesCardviewBinding binding = DataBindingUtil.inflate(inflater, R.layout.notes_cardview, parent,false);
+        return new NotesViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final NotesViewHolder holder, final int position) {
         final NotesModel notes_data = notes_list.get(position);
-        holder.title.setText(notes_data.getTitle());
-        holder.description.setText(notes_data.getDescription());
+        holder.binding.setNotesDetail(notes_data);
+        holder.binding.setNotesHandler(new NotesHandler());
+
         if(notes_data.getCategoryColor() != null){
             int color_drawable = AppConstants.color_map.get(notes_data.getCategoryColor());
             holder.category_color.setBackground(context.getDrawable(color_drawable));
         }
-        holder.cardView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if(holder.delete_checkbox.getVisibility() == View.VISIBLE){
-                    holder.delete_checkbox.setChecked(true);
-                }else{
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", notes_list.get(position).getTitle());
-                    bundle.putString("description", notes_list.get(position).getDescription());
-                    bundle.putInt("id", notes_list.get(position).getId());
-                    bundle.putInt("category_id", notes_list.get(position).getCategory_id());
-                    bundle.putString("category_name", notes_list.get(position).getCategory_name());
-                    bundle.putString("category_color", notes_list.get(position).getCategory_color());
 
-                    NotesDetailsFragment notesDetailsFragment = new NotesDetailsFragment();
-                    notesDetailsFragment.setArguments(bundle);
-                    ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, notesDetailsFragment).addToBackStack("notes_detail").commit();
-                }
-            }
-        });
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View v) {
-                setVisibilityForCheckBox();
-                return true;
-            }
-        });
     }
 
     @Override
@@ -82,35 +53,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     class NotesViewHolder extends RecyclerView.ViewHolder{
-        TextView title;
-        TextView description;
-        CardView cardView;
-        CheckBox delete_checkbox;
+        NotesCardviewBinding binding;
         ImageView category_color;
-        ViewGroup transition_container;
 
-        public NotesViewHolder(View view){
-            super(view);
-            title = view.findViewById(R.id.notes_title);
-            description = view.findViewById(R.id.notes_description);
-            cardView = view.findViewById(R.id.notes_cardview);
-            delete_checkbox = view.findViewById(R.id.delete_checkbox);
-            transition_container = view.findViewById(R.id.transition_container);
-            category_color = view.findViewById(R.id.category_color);
+        public NotesViewHolder(NotesCardviewBinding binding){
+            super(binding.getRoot());
+            category_color = binding.getRoot().findViewById(R.id.category_color);
+            this.binding = binding;
         }
-    }
-
-    void setVisibilityForCheckBox(){
-        View view = fragment.getView();
-        RecyclerView recyclerView = view.findViewById(R.id.notes_recycler_view);
-        TransitionManager.beginDelayedTransition(recyclerView);
-        for(int i=0; i<recyclerView.getChildCount(); i++) {
-            View cardview = recyclerView.getChildAt(i);
-            CheckBox checkBox = cardview.findViewById(R.id.delete_checkbox);
-            if (checkBox.getVisibility() == View.GONE) {
-                checkBox.setVisibility(View.VISIBLE);
-            }
-        }
-        fragment.setHasOptionsMenu(true);
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +20,14 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.vignesh.remainder.databinding.FragmentNotesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class NotesFragment extends Fragment {
+    FragmentNotesBinding binding;
     RecyclerView recyclerView;
     FloatingActionButton add_notes_btn;
     NotesDatabaseHandler notesDatabaseHandler;
@@ -45,15 +48,14 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) view.findViewById(R.id.notes_recycler_view);
         add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         notes_list = new ArrayList<>();
+        getAllNotes();
 
-        final NotesAdapter notesAdapter = new NotesAdapter(getContext(), notes_list, this);
-        recyclerView.setAdapter(notesAdapter);
+        NotesAdapter notesAdapter = new NotesAdapter(getContext(), notes_list, this);
+        binding.setNotesAdapter(notesAdapter);
+
         add_notes_btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -67,13 +69,13 @@ public class NotesFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         });
-
-        getAllNotes();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_notes, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes, container, false);
+        View view = binding.getRoot();
+        return view;
     }
 
     @Override

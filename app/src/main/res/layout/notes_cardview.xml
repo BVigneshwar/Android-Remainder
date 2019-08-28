@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="notesDetail" type="com.vignesh.remainder.NotesModel"/>
+        <variable name="notesHandler" type="com.vignesh.remainder.NotesHandler" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/notes_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="@{(v) -> notesHandler.onCardClick(v, notesDetail)}"
+            android:onLongClick="@{(v) -> notesHandler.onCardLongClick(v)}" >
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/transition_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/delete_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/title_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/category_color"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"/>
+
+                            <TextView
+                                android:id="@+id/notes_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="16sp"
+                                android:text="@{notesDetail.title}"
+                                android:layout_toRightOf="@id/category_color"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/notes_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/title_container"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="14sp"
+                            android:text="@{notesDetail.description}"
+                            android:textColor="#000000" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>
