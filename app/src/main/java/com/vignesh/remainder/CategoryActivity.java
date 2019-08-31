@@ -1,50 +1,60 @@
 package com.vignesh.remainder;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Switch;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
     CategoryAdapter categoryAdapter;
     RecyclerView recyclerView;
+    CategoryViewModel categoryViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
         recyclerView = findViewById(R.id.category_recycler_view);
-        fetchAndRenderCategoryList();
+        categoryAdapter = new CategoryAdapter(this);
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getCategoryList().observe(this, new Observer<List<CategoryEntity>>() {
+            @Override
+            public void onChanged(List<CategoryEntity> category) {
+                categoryAdapter.setData(category);
+            }
+        });
+        recyclerView.setAdapter(categoryAdapter);
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_option, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        new CategoryDialog(this, categoryViewModel).openDialog();
+        return true;
+    }
+
+    /*@Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent();
         intent.putExtra("category_id", 0);
         this.setResult(1, intent);
         this.finish();
-    }
-
-    public void fetchAndRenderCategoryList(){
-        List<CategoryModel> category_list = new ArrayList<>();
-        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(this);
-        Cursor cursor = notesDatabaseHandler.getAllCategory();
-        if(cursor.getCount() != 0){
-            while (cursor.moveToNext()){
-                category_list.add(new CategoryModel(cursor.getInt(0), cursor.getString(1),cursor.getString(2)));
-            }
-        }
-        category_list.add(new CategoryModel(0, getResources().getString(R.string.add_category), null));
-        categoryAdapter = new CategoryAdapter(this, category_list);
-        recyclerView.setAdapter(categoryAdapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
+    }*/
 }

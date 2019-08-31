@@ -10,8 +10,7 @@
         <ImageButton
             android:id="@+id/round_color_button"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/round_blue"/>
+            android:layout_height="50dp"/>
         <ImageView
             android:id="@+id/selector"
             android:layout_width="40dp"
@@ -21,6 +20,4 @@
             android:visibility="invisible"
             android:background="@drawable/color_selector"/>
     </FrameLayout>
-
-
 </RelativeLayout>

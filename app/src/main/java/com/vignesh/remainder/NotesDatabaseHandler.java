@@ -12,7 +12,7 @@ import java.util.Date;
 public class NotesDatabaseHandler extends SQLiteOpenHelper {
     Context context;
     static String DB_name = "Notes_DB";
-    static int DB_version = 2;
+    static int DB_version = 1;
 
     static String notes_table = "Notes_table";
     static String id = "id";
@@ -33,8 +33,6 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_category_table = "CREATE TABLE "+category_table+" ("+category_id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+name+" TEXT, "+color+" TEXT);";
-        db.execSQL(create_category_table);
         String create_notes_table = "CREATE TABLE " + notes_table + "("
                 + id + " INTEGER PRIMARY KEY," + title + " TEXT,"
                 + description + " TEXT," + category_id +" INTEGER, "+ created_time +" DATETIME, "+ last_updated +" DATETIME, FOREIGN KEY("+ category_id +") REFERENCES "+category_table+"("+category_id+"))";
@@ -83,7 +81,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper {
     }
     public Cursor getAllNotes(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT "+id+", "+title+", "+description+", "+notes_table+"."+category_id+", "+name+", "+color+" FROM "+notes_table+" LEFT JOIN "+category_table+" ON "+notes_table+"."+category_id+" = "+category_table+"."+category_id, null);
+        Cursor res = db.rawQuery("SELECT "+id+", "+title+", "+description+" FROM "+notes_table, null);
         return res;
     }
     public boolean deleteNotes(int id){

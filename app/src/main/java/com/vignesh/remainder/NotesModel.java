@@ -8,13 +8,10 @@ public class NotesModel {
     private String category_name;
     private int category_id;
 
-    NotesModel(int id, String title, String description, int category_id, String category_name, String category_color){
+    NotesModel(int id, String title, String description){
         this.id = id;
         this.title = title;
         this.description = description;
-        this.category_id = category_id;
-        this.category_name = category_name;
-        this.category_color = category_color;
     }
 
     public int getId() {

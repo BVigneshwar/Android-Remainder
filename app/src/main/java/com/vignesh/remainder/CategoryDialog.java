@@ -1,5 +1,6 @@
 package com.vignesh.remainder;
 
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -12,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoryDialog {
     Context context;
+    CategoryViewModel categoryViewModel;
 
-    CategoryDialog(Context context){
+    CategoryDialog(Context context, CategoryViewModel categoryViewModel){
         this.context = context;
+        this.categoryViewModel = categoryViewModel;
     }
 
     static class CategoryColorSelector{
@@ -41,7 +43,7 @@ public class CategoryDialog {
         dialog.setTitle(context.getResources().getString(R.string.add_category));
         final GridView color_gridview = dialog.findViewById(R.id.color_gridview);
         Button save_button = dialog.findViewById(R.id.save_category_button);
-        Button cancel_button = dialog.findViewById(R.id.cancel_button);
+        final Button cancel_button = dialog.findViewById(R.id.cancel_button);
         color_gridview.setAdapter(new ColorGridViewAdapter(context, AppConstants.category_drawable_color_list, new CategoryDialog.CategoryColorSelector(color_gridview)));
         dialog.show();
 
@@ -69,13 +71,12 @@ public class CategoryDialog {
                 if(title == null){
                     Toast.makeText(context, "Title cannot be empty", Toast.LENGTH_SHORT).show();
                 }else{
-                    NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(context);
-                    if(notesDatabaseHandler.insertCategory(title, color))
-                        Toast.makeText(context, "Category added successfully", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(context, "category addition failed", Toast.LENGTH_SHORT).show();
+                    CategoryEntity entity = new CategoryEntity();
+                    entity.setCategory_name(title);
+                    entity.setCategory_color(color);
+                    entity.setIs_deleted(false);
+                    categoryViewModel.saveCategory(entity);
                     dialog.dismiss();
-                    ((CategoryActivity)context).fetchAndRenderCategoryList();
                 }
             }
         });

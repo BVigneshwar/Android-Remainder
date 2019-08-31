@@ -1,28 +1,35 @@
 package com.vignesh.remainder;
 
-import android.database.Cursor;
-import android.icu.util.ULocale;
+import android.app.Application;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class CategoryViewModel extends ViewModel {
-    private MutableLiveData<List<CategoryModel>> mutableLiveData;
+public class CategoryViewModel extends AndroidViewModel {
+    private CategoryDAO categoryDAO;
+    private ExecutorService executorService;
 
-    public MutableLiveData<List<CategoryModel>> getCategoryList(){
-        if(mutableLiveData == null){
-            mutableLiveData = new MutableLiveData<>();
-            populateCatgeoryList();
-        }
-        return mutableLiveData;
+    public CategoryViewModel(Application application){
+        super(application);
+        categoryDAO = CategoryDatabase.getCategoryDatabase(application).categoryDAO();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
-    private void populateCatgeoryList(){
-        List<CategoryModel>  category_list = new ArrayList<>();
-        //To-do populate category list
-        mutableLiveData.setValue(category_list);
+    public LiveData<List<CategoryEntity>> getCategoryList() {
+        LiveData<List<CategoryEntity>> category_list = categoryDAO.getCategoryList();
+        return category_list;
+    }
+
+    public void saveCategory(final CategoryEntity categoryEntity){
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                categoryDAO.insertCatgeory(categoryEntity);
+            }
+        });
     }
 }
