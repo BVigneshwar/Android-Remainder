@@ -9,21 +9,36 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vignesh.remainder.databinding.NotesCardviewBinding;
+import com.vignesh.remainder.entity.NotesEntity;
+import com.vignesh.remainder.entity.NotesWithCategory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder>{
     Context context;
-    List<NotesModel> notes_list;
-    Fragment fragment;
+    List<NotesWithCategory> notes_list;
 
-    public NotesAdapter(Context context, List<NotesModel> notes_list, Fragment fragment){
+    public NotesAdapter(Context context){
         this.context = context;
-        this.notes_list = notes_list;
-        this.fragment = fragment;
+        notes_list = new ArrayList<>();
+    }
+
+    public void setNotes(List<NotesWithCategory> newData){
+        if(notes_list != null){
+            DiffCallback diffCallback = new DiffCallback(notes_list, newData);
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+            notes_list.clear();
+            notes_list.addAll(newData);
+            diffResult.dispatchUpdatesTo(this);
+        }else{
+            notes_list = newData;
+        }
     }
 
     @NonNull
@@ -36,12 +51,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull final NotesViewHolder holder, final int position) {
-        final NotesModel notes_data = notes_list.get(position);
-        holder.binding.setNotesDetail(notes_data);
-        holder.binding.setNotesHandler(new NotesHandler());
+        final NotesWithCategory notes_data = notes_list.get(position);
+        holder.notesCardviewBinding.setNotesDetail(notes_data);
+        holder.notesCardviewBinding.setNotesHandler(new NotesHandler());
 
-        if(notes_data.getCategoryColor() != null){
-            int color_drawable = AppConstants.color_map.get(notes_data.getCategoryColor());
+        if(notes_data.getCategory_color() != null){
+            int color_drawable = AppConstants.color_map.get(notes_data.getCategory_color());
             holder.category_color.setBackground(context.getDrawable(color_drawable));
         }
 
@@ -53,13 +68,42 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     class NotesViewHolder extends RecyclerView.ViewHolder{
-        NotesCardviewBinding binding;
+        NotesCardviewBinding notesCardviewBinding;
         ImageView category_color;
 
         public NotesViewHolder(NotesCardviewBinding binding){
             super(binding.getRoot());
             category_color = binding.getRoot().findViewById(R.id.category_color);
-            this.binding = binding;
+            this.notesCardviewBinding = binding;
+        }
+    }
+
+    class DiffCallback extends DiffUtil.Callback{
+
+        final List<NotesWithCategory> oldData, newData;
+
+        DiffCallback(List<NotesWithCategory> oldData, List<NotesWithCategory> newData){
+            this.oldData = oldData;
+            this.newData = newData;
+        }
+        @Override
+        public int getOldListSize() {
+            return oldData.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newData.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldData.get(oldItemPosition) == newData.get(newItemPosition);
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldData.get(oldItemPosition).equals(newData.get(newItemPosition));
         }
     }
 }

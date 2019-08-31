@@ -1,9 +1,13 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.viewModel;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.vignesh.remainder.DAO.CategoryDAO;
+import com.vignesh.remainder.database.CategoryDatabase;
+import com.vignesh.remainder.entity.CategoryEntity;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -28,7 +32,7 @@ public class CategoryViewModel extends AndroidViewModel {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                categoryDAO.insertCatgeory(categoryEntity);
+                categoryDAO.insertCategory(categoryEntity);
             }
         });
     }

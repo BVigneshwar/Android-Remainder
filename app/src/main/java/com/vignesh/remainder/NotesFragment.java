@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +24,9 @@ import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
+import com.vignesh.remainder.entity.NotesEntity;
+import com.vignesh.remainder.entity.NotesWithCategory;
+import com.vignesh.remainder.viewModel.NotesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +56,15 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
 
-        notes_list = new ArrayList<>();
-        getAllNotes();
+        NotesAdapter notesAdapter = new NotesAdapter(getContext());
 
-        NotesAdapter notesAdapter = new NotesAdapter(getContext(), notes_list, this);
+        NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
+        notesViewModel.getNotesWithCategory().observe(this, new Observer<List<NotesWithCategory>>() {
+            @Override
+            public void onChanged(List<NotesWithCategory> notes) {
+
+            }
+        });
         binding.setNotesAdapter(notesAdapter);
 
         add_notes_btn.setOnClickListener(new View.OnClickListener(){
@@ -87,7 +98,7 @@ public class NotesFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getAllNotes(){
+    /*private void getAllNotes(){
         NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
         Cursor cursor = notesDatabaseHandler.getAllNotes();
         if(cursor.getCount() != 0){
@@ -95,7 +106,7 @@ public class NotesFragment extends Fragment {
                 notes_list.add(new NotesModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2)));
             }
         }
-    }
+    }*/
 
     private void deleteNotes(){
         NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());

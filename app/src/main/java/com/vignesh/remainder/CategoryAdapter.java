@@ -1,17 +1,18 @@
 package com.vignesh.remainder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.vignesh.remainder.databinding.CategoryListBinding;
+import com.vignesh.remainder.entity.CategoryEntity;
+import com.vignesh.remainder.handler.CategoryHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,27 +42,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.category_list, null);
-        return new CategoryViewHolder(view);
+        CategoryListBinding binding = DataBindingUtil.inflate(inflater, R.layout.category_list, parent, false);
+        return new CategoryViewHolder(binding);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
-        holder.category_title.setText(category_list.get(position).getCategory_name());
+
+        holder.categoryListBinding.setCategoryData(category_list.get(position));
+        holder.categoryListBinding.setCategoryHandler(new CategoryHandler());
+        holder.categoryListBinding.setContext(context);
+
         String color = category_list.get(position).getCategory_color();
         if(color != null){
             int color_drawable = AppConstants.color_map.get(color);
             holder.category_color.setBackground(context.getDrawable(color_drawable));
-            holder.category_list_container.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.putExtra("category_id", category_list.get(position).getCategory_id());
-                    ((AppCompatActivity)context).setResult(1, intent);
-                    ((AppCompatActivity) context).finish();
-                }
-            });
         }
     }
 
@@ -71,15 +67,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder{
-        TextView category_title;
-        ViewGroup category_list_container;
         ImageView category_color;
+        CategoryListBinding categoryListBinding;
 
-        public CategoryViewHolder(View view){
-            super(view);
-            category_title = view.findViewById(R.id.category_title);
-            category_list_container = view.findViewById(R.id.category_list_container);
-            category_color = view.findViewById(R.id.category_color);
+        public CategoryViewHolder(CategoryListBinding binding){
+            super(binding.getRoot());
+            categoryListBinding = binding;
+            category_color = binding.getRoot().findViewById(R.id.category_color);
         }
     }
 

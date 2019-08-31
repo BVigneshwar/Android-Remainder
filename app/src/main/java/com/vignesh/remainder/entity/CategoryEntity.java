@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.entity;
 
 import android.widget.Switch;
 

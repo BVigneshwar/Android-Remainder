@@ -1,9 +1,11 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.DAO;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.vignesh.remainder.entity.CategoryEntity;
 
 import java.util.List;
 
@@ -14,5 +16,5 @@ public interface CategoryDAO {
     LiveData<List<CategoryEntity>> getCategoryList();
 
     @Insert
-    long insertCatgeory(CategoryEntity categoryEntity);
+    long insertCategory(CategoryEntity categoryEntity);
 }

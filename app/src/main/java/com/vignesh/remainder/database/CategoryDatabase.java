@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.database;
 
 import android.content.Context;
 
@@ -9,6 +9,9 @@ import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
+
+import com.vignesh.remainder.DAO.CategoryDAO;
+import com.vignesh.remainder.entity.CategoryEntity;
 
 @Database(entities = {CategoryEntity.class}, version = 1)
 public abstract class CategoryDatabase extends RoomDatabase {
@@ -22,7 +25,7 @@ public abstract class CategoryDatabase extends RoomDatabase {
     public static CategoryDatabase getCategoryDatabase(Context context){
         synchronized (slock){
             if(categoryDatabase == null){
-                categoryDatabase = Room.databaseBuilder(context.getApplicationContext(), CategoryDatabase.class, "personal-assistant-database").allowMainThreadQueries().build();
+                categoryDatabase = Room.databaseBuilder(context.getApplicationContext(), CategoryDatabase.class, "category_database").allowMainThreadQueries().build();
             }
             return categoryDatabase;
         }

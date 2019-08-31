@@ -5,12 +5,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Switch;
+
+import com.vignesh.remainder.entity.CategoryEntity;
+import com.vignesh.remainder.viewModel.CategoryViewModel;
 
 import java.util.List;
 
@@ -45,8 +46,13 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        new CategoryDialog(this, categoryViewModel).openDialog();
-        return true;
+        if(item.getItemId() == R.id.add_icon){
+            new CategoryDialog(this, categoryViewModel).openDialog();
+            return true;
+        }else{
+            super.onOptionsItemSelected(item);
+            return false;
+        }
     }
 
     /*@Override
