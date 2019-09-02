@@ -28,7 +28,6 @@ import com.vignesh.remainder.entity.NotesEntity;
 import com.vignesh.remainder.entity.NotesWithCategory;
 import com.vignesh.remainder.viewModel.NotesViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -72,11 +71,12 @@ public class NotesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NotesEditFragment notesEditFragment = new NotesEditFragment();
-                Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putString("title", null);
                 bundle.putString("description", null);
                 bundle.putInt("id", 0);
-                notesEditFragment.setArguments(bundle);
+                notesEditFragment.setArguments(bundle);*/
+
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         });

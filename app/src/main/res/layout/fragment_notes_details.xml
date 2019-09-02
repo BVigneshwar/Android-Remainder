@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".NotesDetailsFragment">
-
-    <TextView
-        android:id="@+id/category_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:text="Uncategorised"
-        android:textAllCaps="false"
-        android:textSize="12sp"
-        android:background="@drawable/category_button"/>
-
-    <TextView
-        android:id="@+id/tv_notes_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="@dimen/font_size"
-        android:textStyle="bold"
-        android:hint="@string/title"/>
-
-    <TextView
-        android:id="@+id/tv_notes_description"
+<layout>
+    <data>
+        <variable name="notesData" type="com.vignesh.remainder.entity.NotesWithCategory" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top"
-        android:textSize="@dimen/font_size"
-        android:layout_marginTop="10dp"
-        android:hint="@string/notes"/>
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".NotesDetailsFragment">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/category_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Uncategorised"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:background="@drawable/category_button"/>
+
+        <TextView
+            android:id="@+id/tv_notes_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/font_size"
+            android:textStyle="bold"
+            android:hint="@string/title"/>
+
+        <TextView
+            android:id="@+id/tv_notes_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="10dp"
+            android:hint="@string/notes"/>
+
+    </LinearLayout>
+</layout>
