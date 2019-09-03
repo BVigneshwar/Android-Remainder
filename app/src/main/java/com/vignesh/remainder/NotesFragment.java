@@ -1,6 +1,7 @@
 package com.vignesh.remainder;
 
 
+import android.app.Application;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -71,12 +72,6 @@ public class NotesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NotesEditFragment notesEditFragment = new NotesEditFragment();
-                /*Bundle bundle = new Bundle();
-                bundle.putString("title", null);
-                bundle.putString("description", null);
-                bundle.putInt("id", 0);
-                notesEditFragment.setArguments(bundle);*/
-
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         });

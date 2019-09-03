@@ -17,4 +17,5 @@ public interface CategoryDAO {
 
     @Insert
     long insertCategory(CategoryEntity categoryEntity);
+
 }

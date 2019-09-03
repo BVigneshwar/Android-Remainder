@@ -8,10 +8,13 @@ import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.vignesh.remainder.DAO.CategoryDAO;
 import com.vignesh.remainder.entity.CategoryEntity;
+
+import java.util.concurrent.Executors;
 
 @Database(entities = {CategoryEntity.class}, version = 1)
 public abstract class CategoryDatabase extends RoomDatabase {
@@ -22,10 +25,25 @@ public abstract class CategoryDatabase extends RoomDatabase {
 
     static Object slock = new Object();
 
-    public static CategoryDatabase getCategoryDatabase(Context context){
+    public static CategoryDatabase getCategoryDatabase(final Context context){
         synchronized (slock){
             if(categoryDatabase == null){
-                categoryDatabase = Room.databaseBuilder(context.getApplicationContext(), CategoryDatabase.class, "category_database").allowMainThreadQueries().build();
+                categoryDatabase = Room.databaseBuilder(context.getApplicationContext(), CategoryDatabase.class, "categorydatabase").addCallback(new Callback() {
+                    @Override
+                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                        super.onCreate(db);
+                        Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                CategoryEntity defaultCatgeory = new CategoryEntity();
+                                defaultCatgeory.setCategory_name("Uncategorized");
+                                defaultCatgeory.setCategory_color("#9e9e9e");
+                                defaultCatgeory.setIs_deleted(false);
+                                getCategoryDatabase(context).categoryDAO().insertCategory(defaultCatgeory);
+                            }
+                        });
+                    }
+                }).build();
             }
             return categoryDatabase;
         }

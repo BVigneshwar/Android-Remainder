@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.NotesDatabase;
@@ -19,6 +20,7 @@ public class NotesViewModel extends AndroidViewModel {
 
     NotesDAO notesDAO;
     ExecutorService executorService;
+    MutableLiveData<NotesWithCategory> selected_notes;
 
     public NotesViewModel(@NonNull Application application) {
         super(application);
@@ -29,5 +31,13 @@ public class NotesViewModel extends AndroidViewModel {
     public LiveData<List<NotesWithCategory>> getNotesWithCategory(){
         LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory();
         return notes_list;
+    }
+
+    public void selectNotes(NotesWithCategory notesWithCategory){
+        selected_notes.setValue(notesWithCategory);
+    }
+
+    public MutableLiveData<NotesWithCategory> getSelectedNotes(){
+        return selected_notes;
     }
 }

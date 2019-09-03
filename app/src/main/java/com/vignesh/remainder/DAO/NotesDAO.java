@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
 import com.vignesh.remainder.entity.NotesWithCategory;
 
@@ -22,4 +23,6 @@ public interface NotesDAO {
     @Query("SELECT notes_table.notes_id, notes_table.notes_name, notes_table.notes_description, notes_table.category_id, notes_table.created_time, notes_table.last_modified, category_table.category_name, category_table.category_color FROM notes_table JOIN category_table ON notes_table.category_id = category_table.category_id")
     LiveData<List<NotesWithCategory>> getAllNotesWithCategory();
 
+    @Query("SELECT category_id, category_name, category_color, is_deleted FROM category_table WHERE category_name=\"Uncategorized\"")
+    LiveData<CategoryEntity> getDefaultCatgeory();
 }
