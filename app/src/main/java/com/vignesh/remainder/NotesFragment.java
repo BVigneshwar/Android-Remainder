@@ -56,13 +56,13 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
 
-        NotesAdapter notesAdapter = new NotesAdapter(getContext());
+        final NotesAdapter notesAdapter = new NotesAdapter(getContext());
 
-        NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
+        final NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
         notesViewModel.getNotesWithCategory().observe(this, new Observer<List<NotesWithCategory>>() {
             @Override
             public void onChanged(List<NotesWithCategory> notes) {
-
+                notesAdapter.setNotes(notes);
             }
         });
         binding.setNotesAdapter(notesAdapter);
@@ -72,6 +72,8 @@ public class NotesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NotesEditFragment notesEditFragment = new NotesEditFragment();
+                NotesViewModel notesViewModel1 = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
+                notesViewModel.getNewNotes();
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         });

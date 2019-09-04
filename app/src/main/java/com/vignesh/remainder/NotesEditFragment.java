@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,11 +27,9 @@ import com.vignesh.remainder.viewModel.NotesViewModel;
 import java.util.List;
 
 public class NotesEditFragment extends Fragment {
-    String selected_title, selected_description;
-    int selected_id;
     TextView category_button;
     NotesWithCategory notesWithCategory;
-
+    NotesViewModel notesViewModel;
     FragmentNotesEditBinding fragmentNotesEditBinding;
 
     @Override
@@ -42,13 +42,13 @@ public class NotesEditFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*NotesViewModel notesViewModel = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
-        notesViewModel.getNotesWithCategory().observe(this, new Observer<List<NotesWithCategory>>() {
+        notesViewModel = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
+        notesViewModel.getNewNotes().observe(this, new Observer<NotesWithCategory>() {
             @Override
-            public void onChanged(List<NotesWithCategory> notesWithCategories) {
-
+            public void onChanged(NotesWithCategory notesWithCategory) {
+                fragmentNotesEditBinding.setNotesDetail(notesWithCategory);
             }
-        });*/
+        });
 
         setHasOptionsMenu(true);
     }
@@ -76,7 +76,7 @@ public class NotesEditFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.save_menu){
-            saveNotes();
+            notesViewModel.saveNotes(notesViewModel.getSelectedNotes().getValue());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -90,31 +90,5 @@ public class NotesEditFragment extends Fragment {
              notesWithCategory.setCategory_name(data.getStringExtra("category_name"));
              notesWithCategory.setCategory_color(data.getStringExtra("category_color"));
         }
-    }
-
-    private void saveNotes(){
-        /*EditText et_title = (EditText) getView().findViewById(R.id.et_notes_title);
-        EditText et_description = (EditText) getView().findViewById(R.id.et_notes_description);
-        String title = et_title.getText().toString();
-        String description = et_description.getText().toString();
-
-        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        if(selected_id > 0){
-            if(title.length() > 0 || description.length() > 0){
-                if(notesDatabaseHandler.update(selected_id, title, description, selected_category)){
-                    Toast.makeText(getContext(), "Notes Edited", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Error in editing", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }else{
-            if(title.length() > 0 || description.length() > 0){
-                if(notesDatabaseHandler.insert(title, description, selected_category)){
-                    Toast.makeText(getContext(), "Notes Saved", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Error in saving", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }*/
     }
 }

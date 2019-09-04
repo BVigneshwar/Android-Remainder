@@ -18,4 +18,6 @@ public interface CategoryDAO {
     @Insert
     long insertCategory(CategoryEntity categoryEntity);
 
+    @Query("SELECT * FROM category_table WHERE category_name = 'Uncategorized'")
+    CategoryEntity getDefaultCatgeory();
 }
