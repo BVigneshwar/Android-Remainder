@@ -2,15 +2,10 @@ package com.vignesh.remainder.entity;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.room.Embedded;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import com.vignesh.remainder.BR;
 
-@Entity
 public class NotesWithCategory extends BaseObservable {
-    @PrimaryKey(autoGenerate = true)
     private int notes_id;
     private String notes_name;
     private String notes_description;
