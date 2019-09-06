@@ -22,4 +22,13 @@ public interface NotesDAO {
 
     @Insert
     void insertNotes(NotesEntity notesEntity);
+
+    @Query("SELECT * FROM category_table")
+    LiveData<List<CategoryEntity>> getCategoryList();
+
+    @Insert
+    long insertCategory(CategoryEntity categoryEntity);
+
+    @Query("SELECT * FROM category_table WHERE category_name = 'Uncategorized'")
+    CategoryEntity getDefaultCatgeory();
 }

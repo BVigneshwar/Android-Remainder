@@ -45,8 +45,9 @@ public class NotesEditFragment extends Fragment {
         notesViewModel = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
         notesViewModel.getNewNotes().observe(this, new Observer<NotesWithCategory>() {
             @Override
-            public void onChanged(NotesWithCategory notesWithCategory) {
-                fragmentNotesEditBinding.setNotesDetail(notesWithCategory);
+            public void onChanged(NotesWithCategory notes) {
+                notesWithCategory = notes;
+                fragmentNotesEditBinding.setNotesDetail(notes);
             }
         });
 
