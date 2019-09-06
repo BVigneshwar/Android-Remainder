@@ -12,6 +12,7 @@ import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.CategoryDatabase;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.CategoryEntity;
+import com.vignesh.remainder.entity.NotesEntity;
 import com.vignesh.remainder.entity.NotesWithCategory;
 
 import java.text.DateFormat;
@@ -70,9 +71,16 @@ public class NotesViewModel extends AndroidViewModel {
             public void run() {
                 DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
                 Date current_dateobj = new Date();
-                notesWithCategory.setCreated_time(df.format(current_dateobj));
-                notesWithCategory.setLast_modified(df.format(current_dateobj));
-                notesDAO.insertNotes(notesWithCategory);
+
+                NotesEntity notesEntity = new NotesEntity();
+                notesEntity.setNotes_id(notesWithCategory.getNotes_id());
+                notesEntity.setNotes_name(notesWithCategory.getNotes_name());
+                notesEntity.setNotes_description(notesWithCategory.getNotes_description());
+                notesEntity.setCategory_id(notesWithCategory.getCategory_id());
+                notesEntity.setCreated_time(df.format(current_dateobj));
+                notesEntity.setLast_modified(df.format(current_dateobj));
+
+                notesDAO.insertNotes(notesEntity);
             }
         });
 

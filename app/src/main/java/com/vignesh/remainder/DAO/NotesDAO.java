@@ -21,5 +21,5 @@ public interface NotesDAO {
     LiveData<List<NotesWithCategory>> getAllNotesWithCategory();
 
     @Insert
-    void insertNotes(NotesWithCategory notesWithCategory);
+    void insertNotes(NotesEntity notesEntity);
 }

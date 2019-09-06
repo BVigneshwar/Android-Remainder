@@ -9,9 +9,8 @@ import androidx.room.RoomDatabase;
 import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
-import com.vignesh.remainder.entity.NotesWithCategory;
 
-@Database(entities = {NotesEntity.class, CategoryEntity.class, NotesWithCategory.class}, version = 1)
+@Database(entities = {NotesEntity.class, CategoryEntity.class}, version = 1)
 public abstract class NotesDatabase extends RoomDatabase {
     private static NotesDatabase notesDatabase;
 
