@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.vignesh.remainder.NotesModel.NotesEditFragment;
+import com.vignesh.remainder.R;
 
 public class NotesDetailsFragment extends Fragment {
     String selected_title, selected_description, category_name, category_color;

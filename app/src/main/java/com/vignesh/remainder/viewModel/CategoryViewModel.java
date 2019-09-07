@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.vignesh.remainder.DAO.CategoryDAO;
 import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.CategoryEntity;
@@ -15,16 +16,16 @@ import java.util.concurrent.Executors;
 
 public class CategoryViewModel extends AndroidViewModel {
     private ExecutorService executorService;
-    NotesDAO notesDAO;
+    CategoryDAO categoryDAO;
 
     public CategoryViewModel(Application application){
         super(application);
-        notesDAO = NotesDatabase.getNotesDatabase(application).notesDAO();
+        categoryDAO = NotesDatabase.getNotesDatabase(application).categoryDAO();
         executorService = Executors.newSingleThreadExecutor();
     }
 
     public LiveData<List<CategoryEntity>> getCategoryList() {
-        LiveData<List<CategoryEntity>> category_list = notesDAO.getCategoryList();
+        LiveData<List<CategoryEntity>> category_list = categoryDAO.getCategoryList();
         return category_list;
     }
 
@@ -32,7 +33,7 @@ public class CategoryViewModel extends AndroidViewModel {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                notesDAO.insertCategory(categoryEntity);
+                categoryDAO.insertCategory(categoryEntity);
             }
         });
     }

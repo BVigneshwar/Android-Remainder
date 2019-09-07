@@ -3,12 +3,13 @@ package com.vignesh.remainder;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.vignesh.remainder.NotesModel.NotesFragment;
+import com.vignesh.remainder.TaskModule.TaskFragment;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.notes_tab :
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesFragment()).commit();
+                        break;
+                    case R.id.task_tab :
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new TaskFragment()).commit();
+                        break;
                 }
                 return true;
             }

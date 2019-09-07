@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="notesDetail" type="com.vignesh.remainder.entity.NotesWithCategory"/>
-        <variable name="notesHandler" type="com.vignesh.remainder.NotesHandler" />
+        <variable name="notesHandler" type="com.vignesh.remainder.NotesModel.NotesFragment.NotesHandler" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vignesh.remainder.AppConstants;
+import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.CategoryListBinding;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.handler.CategoryHandler;

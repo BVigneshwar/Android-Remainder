@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
@@ -23,12 +24,7 @@ public interface NotesDAO {
     @Insert
     void insertNotes(NotesEntity notesEntity);
 
-    @Query("SELECT * FROM category_table")
-    LiveData<List<CategoryEntity>> getCategoryList();
+    @Update
+    void updateNotes(NotesEntity notesEntity);
 
-    @Insert
-    long insertCategory(CategoryEntity categoryEntity);
-
-    @Query("SELECT * FROM category_table WHERE category_name = 'Uncategorized'")
-    CategoryEntity getDefaultCatgeory();
 }

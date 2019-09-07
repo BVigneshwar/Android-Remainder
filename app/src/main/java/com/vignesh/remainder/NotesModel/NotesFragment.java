@@ -1,8 +1,6 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 
-import android.app.Application;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,11 +8,10 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,9 +21,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
-import com.vignesh.remainder.entity.NotesEntity;
 import com.vignesh.remainder.entity.NotesWithCategory;
+import com.vignesh.remainder.handler.NotesHandlerInterface;
 import com.vignesh.remainder.viewModel.NotesViewModel;
 
 import java.util.List;
@@ -36,14 +34,13 @@ public class NotesFragment extends Fragment {
     FragmentNotesBinding binding;
     RecyclerView recyclerView;
     FloatingActionButton add_notes_btn;
-    NotesDatabaseHandler notesDatabaseHandler;
-    List<NotesModel> notes_list;
+    NotesFragment.NotesHandler notesHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        notesDatabaseHandler = new NotesDatabaseHandler(getContext());
         setHasOptionsMenu(false);
+        notesHandler = new NotesHandler(this);
     }
 
     @Override
@@ -56,7 +53,7 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
 
-        final NotesAdapter notesAdapter = new NotesAdapter(getContext());
+        final NotesAdapter notesAdapter = new NotesAdapter(getContext(), notesHandler);
 
         final NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
         notesViewModel.getNotesWithCategory().observe(this, new Observer<List<NotesWithCategory>>() {
@@ -89,32 +86,45 @@ public class NotesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.delete_button){
-            deleteNotes();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /*private void getAllNotes(){
-        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        Cursor cursor = notesDatabaseHandler.getAllNotes();
-        if(cursor.getCount() != 0){
-            while (cursor.moveToNext()){
-                notes_list.add(new NotesModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2)));
-            }
-        }
-    }*/
+    public class NotesHandler implements NotesHandlerInterface{
+        Fragment fragment;
 
-    private void deleteNotes(){
-        NotesDatabaseHandler notesDatabaseHandler = new NotesDatabaseHandler(getContext());
-        for(int list_count=0; list_count<recyclerView.getChildCount(); list_count++){
-            View view = recyclerView.getChildAt(list_count);
-            CheckBox checkBox = view.findViewById(R.id.delete_checkbox);
-            if(checkBox.isChecked()){
-                notesDatabaseHandler.deleteNotes(notes_list.get(list_count).getId());
+        public NotesHandler(Fragment fragment){
+            this.fragment = fragment;
+        }
+
+        @Override
+        public void onCardClick(View v, NotesWithCategory notesData) {
+            CheckBox delete_checkbox = (CheckBox) v.findViewById(R.id.delete_checkbox);
+            if(delete_checkbox.getVisibility() == View.VISIBLE){
+                delete_checkbox.setChecked(true);
+            }else{
+                NotesEditFragment notesEditFragment = new NotesEditFragment();
+                NotesViewModel notesViewModel = ViewModelProviders.of(fragment.getActivity()).get(NotesViewModel.class);
+                notesViewModel.setSelectedNotes(notesData);
+                fragment.getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }
         }
-        getFragmentManager().beginTransaction().replace(R.id.frame_layout, new NotesFragment()).commit();
+
+        @Override
+        public boolean onCardLongClick(View v) {
+            RecyclerView recyclerView = (RecyclerView)(v.getParent().getParent());
+            TransitionManager.beginDelayedTransition(recyclerView);
+            for(int i=0; i<recyclerView.getChildCount(); i++) {
+                View cardview = recyclerView.getChildAt(i);
+                CheckBox checkBox = cardview.findViewById(R.id.delete_checkbox);
+                if (checkBox.getVisibility() == View.GONE) {
+                    checkBox.setVisibility(View.VISIBLE);
+                }
+            }
+            setHasOptionsMenu(true);
+            return true;
+        }
     }
 
 }

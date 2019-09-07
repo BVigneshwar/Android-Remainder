@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.vignesh.remainder.AppConstants;
+import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.viewModel.CategoryViewModel;
 

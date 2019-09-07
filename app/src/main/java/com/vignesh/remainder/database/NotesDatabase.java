@@ -8,6 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.vignesh.remainder.DAO.CategoryDAO;
 import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
@@ -19,6 +20,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     private static NotesDatabase notesDatabase;
 
     public abstract NotesDAO notesDAO();
+    public abstract CategoryDAO categoryDAO();
 
     static Object slock = new Object();
 
@@ -36,7 +38,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                                 defaultCatgeory.setCategory_name("Uncategorized");
                                 defaultCatgeory.setCategory_color("#9e9e9e");
                                 defaultCatgeory.setIs_deleted(false);
-                                getNotesDatabase(context).notesDAO().insertCategory(defaultCatgeory);
+                                getNotesDatabase(context).categoryDAO().insertCategory(defaultCatgeory);
                             }
                         });
                     }

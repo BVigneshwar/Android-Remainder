@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vignesh.remainder.AppConstants;
+import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.NotesCardviewBinding;
 import com.vignesh.remainder.entity.NotesWithCategory;
 
@@ -18,10 +20,12 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder>{
     Context context;
+    NotesFragment.NotesHandler notesHandler;
     List<NotesWithCategory> notes_list;
 
-    public NotesAdapter(Context context){
+    public NotesAdapter(Context context, NotesFragment.NotesHandler notesHandler){
         this.context = context;
+        this.notesHandler = notesHandler;
         notes_list = new ArrayList<>();
     }
 
@@ -50,7 +54,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     public void onBindViewHolder(@NonNull final NotesViewHolder holder, final int position) {
         final NotesWithCategory notes_data = notes_list.get(position);
         holder.notesCardviewBinding.setNotesDetail(notes_data);
-        holder.notesCardviewBinding.setNotesHandler(new NotesHandler());
+        holder.notesCardviewBinding.setNotesHandler(notesHandler);
 
         if(notes_data.getCategory_color() != null){
             int color_drawable = AppConstants.color_map.get(notes_data.getCategory_color());

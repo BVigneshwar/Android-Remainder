@@ -1,4 +1,4 @@
-package com.vignesh.remainder;
+package com.vignesh.remainder.NotesModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesEditBinding;
 import com.vignesh.remainder.entity.NotesWithCategory;
 import com.vignesh.remainder.viewModel.NotesViewModel;
-
-import java.util.List;
 
 public class NotesEditFragment extends Fragment {
     TextView category_button;
@@ -43,7 +40,7 @@ public class NotesEditFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         notesViewModel = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
-        notesViewModel.getNewNotes().observe(this, new Observer<NotesWithCategory>() {
+        notesViewModel.getSelectedNotes().observe(this, new Observer<NotesWithCategory>() {
             @Override
             public void onChanged(NotesWithCategory notes) {
                 notesWithCategory = notes;

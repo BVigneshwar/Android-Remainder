@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".NotesDetailsFragment">
+        tools:context=".NotesModel.NotesDetailsFragment">
 
         <TextView
             android:id="@+id/category_button"
