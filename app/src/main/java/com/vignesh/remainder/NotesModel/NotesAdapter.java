@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vignesh.remainder.AppConstants;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.NotesCardviewBinding;
-import com.vignesh.remainder.entity.NotesWithCategory;
 
 import java.util.ArrayList;
 import java.util.List;

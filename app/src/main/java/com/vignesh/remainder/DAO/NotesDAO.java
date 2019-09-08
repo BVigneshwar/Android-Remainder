@@ -6,9 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
-import com.vignesh.remainder.entity.NotesWithCategory;
+import com.vignesh.remainder.NotesModel.NotesWithCategory;
 
 import java.util.List;
 

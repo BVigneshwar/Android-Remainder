@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="notesDetail" type="com.vignesh.remainder.entity.NotesWithCategory"/>
+        <variable name="notesDetail" type="com.vignesh.remainder.NotesModel.NotesWithCategory"/>
         <variable name="notesHandler" type="com.vignesh.remainder.NotesModel.NotesFragment.NotesHandler" />
     </data>
     <RelativeLayout

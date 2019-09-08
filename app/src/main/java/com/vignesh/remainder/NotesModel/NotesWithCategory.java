@@ -1,4 +1,4 @@
-package com.vignesh.remainder.entity;
+package com.vignesh.remainder.NotesModel;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;

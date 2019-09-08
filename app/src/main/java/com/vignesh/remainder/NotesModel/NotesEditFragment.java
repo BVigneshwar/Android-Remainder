@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesEditBinding;
-import com.vignesh.remainder.entity.NotesWithCategory;
 import com.vignesh.remainder.viewModel.NotesViewModel;
 
 public class NotesEditFragment extends Fragment {
