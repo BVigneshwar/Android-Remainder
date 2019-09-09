@@ -25,6 +25,8 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public abstract NotesDAO notesDAO();
     public abstract CategoryDAO categoryDAO();
+    public abstract TaskDAO taskDAO();
+    public abstract TaskListDAO taskListDAO();
 
     static Object slock = new Object();
 
