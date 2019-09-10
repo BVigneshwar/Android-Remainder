@@ -6,6 +6,8 @@ import androidx.room.Query;
 
 import com.vignesh.remainder.entity.TaskEntity;
 
+import java.util.List;
+
 @Dao
 public interface TaskDAO {
 
@@ -13,5 +15,5 @@ public interface TaskDAO {
     void insertTask(TaskEntity taskEntity);
 
     @Query("SELECT * FROM task_table")
-    TaskEntity selectAllTask();
+    List<TaskEntity> getAllTask();
 }

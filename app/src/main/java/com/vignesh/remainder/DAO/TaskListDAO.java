@@ -14,5 +14,5 @@ public interface TaskListDAO {
     void insertTaskList(TaskListEntity taskListEntity);
 
     @Query("SELECT * FROM task_list_table")
-    TaskEntity selectAllTaskList();
+    TaskEntity getAllTaskList();
 }
