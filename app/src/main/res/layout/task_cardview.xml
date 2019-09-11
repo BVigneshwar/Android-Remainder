@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="taskData" type="com.vignesh.remainder.entity.TaskEntity" />
+        <variable name="taskHandler" type="com.vignesh.remainder.TaskModule.TaskFragment.TaskHandler" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v) -> taskHandler.onCardClick(v, taskData)}"
+            android:onLongClick="@{(v) -> taskHandler.onCardLongClick(v)}" >
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/transition_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/delete_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/task_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp"
+                            android:text="@{taskData.task_name}"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/task_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/task_title"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="14sp"
+                            android:text="@{taskData.task_description}"
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

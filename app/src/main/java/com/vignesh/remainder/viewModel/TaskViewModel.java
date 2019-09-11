@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.vignesh.remainder.DAO.TaskDAO;
 import com.vignesh.remainder.database.NotesDatabase;
@@ -19,7 +20,7 @@ public class TaskViewModel extends AndroidViewModel {
         taskDAO = NotesDatabase.getNotesDatabase(application).taskDAO();
     }
 
-    List<TaskEntity> getAllTask(){
+    public MutableLiveData<List<TaskEntity>> getAllTask(){
         return taskDAO.getAllTask();
     }
 }
