@@ -2,7 +2,6 @@ package com.vignesh.remainder.TaskModule;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,14 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vignesh.remainder.NotesModel.NotesAdapter;
-import com.vignesh.remainder.NotesModel.NotesWithCategory;
 import com.vignesh.remainder.R;
-import com.vignesh.remainder.databinding.FragmentTaskBinding;
-import com.vignesh.remainder.databinding.NotesCardviewBinding;
 import com.vignesh.remainder.databinding.TaskCardviewBinding;
 import com.vignesh.remainder.entity.TaskEntity;
-import com.vignesh.remainder.viewModel.TaskViewModel;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModel;
+package com.vignesh.remainder.NotesModule;
 
 import android.content.Context;
 import android.view.LayoutInflater;

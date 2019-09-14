@@ -12,7 +12,7 @@ import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
-import com.vignesh.remainder.NotesModel.NotesWithCategory;
+import com.vignesh.remainder.NotesModule.NotesWithCategory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

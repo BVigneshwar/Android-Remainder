@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModel;
+package com.vignesh.remainder.NotesModule;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.vignesh.remainder.NotesModel.NotesEditFragment;
 import com.vignesh.remainder.R;
 
 public class NotesDetailsFragment extends Fragment {

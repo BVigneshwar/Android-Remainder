@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModel;
+package com.vignesh.remainder.NotesModule;
 
 import android.app.Dialog;
 import android.content.Context;

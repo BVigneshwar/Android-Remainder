@@ -13,13 +13,11 @@ import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vignesh.remainder.NotesModel.NotesWithCategory;
+import com.vignesh.remainder.NotesModule.NotesWithCategory;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.TaskEntity;
 import com.vignesh.remainder.handler.TaskHandlerInterface;

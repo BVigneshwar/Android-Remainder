@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModel;
+package com.vignesh.remainder.NotesModule;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.vignesh.remainder.NotesModel.CategoryDialog;
 import com.vignesh.remainder.R;
 
 

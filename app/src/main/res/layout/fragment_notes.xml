@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="notesAdapter" type="com.vignesh.remainder.NotesModel.NotesAdapter" />
+        <variable name="notesAdapter" type="com.vignesh.remainder.NotesModule.NotesAdapter" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/notes_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".NotesModel.NotesFragment">
+        tools:context=".NotesModule.NotesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notes_recycler_view"

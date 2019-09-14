@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.vignesh.remainder.NotesModel.NotesFragment;
+import com.vignesh.remainder.NotesModule.NotesFragment;
 import com.vignesh.remainder.TaskModule.TaskFragment;
 
 public class MainActivity extends AppCompatActivity {

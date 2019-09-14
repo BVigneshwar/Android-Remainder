@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
     <data>
-        <variable name="notesDetail" type="com.vignesh.remainder.NotesModel.NotesWithCategory" />
+        <variable name="notesDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".NotesModel.NotesDetailsFragment">
+        tools:context=".NotesModule.NotesDetailsFragment">
         <TextView
             android:id="@+id/category_button"
             android:layout_width="wrap_content"
