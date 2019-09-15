@@ -15,5 +15,12 @@
         <item name="android:windowNoTitle">false</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+    <style name="bold_text">
+        <item name="android:textSize">@dimen/bold_font_size</item>
+        <item name="android:fontWeight">700</item>
+    </style>
+    <style name="normal_text">
+        <item name="android:textSize">@dimen/normal_font_size</item>
+    </style>
 
 </resources>

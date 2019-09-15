@@ -8,6 +8,8 @@ import androidx.room.Query;
 import com.vignesh.remainder.entity.TaskEntity;
 import com.vignesh.remainder.entity.TaskListEntity;
 
+import java.util.List;
+
 @Dao
 public interface TaskListDAO {
 
@@ -18,5 +20,5 @@ public interface TaskListDAO {
     TaskEntity getAllTaskList();
 
     @Query("SELECT * FROM task_list_table WHERE task_id =:task_id")
-    MutableLiveData<TaskListEntity> getAllTaskList(int task_id);
+    MutableLiveData<List<TaskListEntity>> getAllTaskList(int task_id);
 }

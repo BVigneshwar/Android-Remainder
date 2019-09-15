@@ -11,6 +11,8 @@ import com.vignesh.remainder.DAO.TaskListDAO;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.TaskListEntity;
 
+import java.util.List;
+
 public class TaskListViewModel extends AndroidViewModel {
     TaskListDAO taskListDAO;
 
@@ -19,7 +21,7 @@ public class TaskListViewModel extends AndroidViewModel {
         taskListDAO = NotesDatabase.getNotesDatabase(application).taskListDAO();
     }
 
-    public MutableLiveData<TaskListEntity> getAllTaskListFor(int task_id){
+    public MutableLiveData<List<TaskListEntity>> getAllTaskListFor(int task_id){
         return taskListDAO.getAllTaskList(task_id);
     }
 }

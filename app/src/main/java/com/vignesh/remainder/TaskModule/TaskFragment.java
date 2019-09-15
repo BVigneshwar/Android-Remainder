@@ -17,7 +17,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vignesh.remainder.NotesModule.NotesWithCategory;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.TaskEntity;
 import com.vignesh.remainder.handler.TaskHandlerInterface;
@@ -63,12 +62,14 @@ public class TaskFragment extends Fragment {
     public class TaskHandler implements TaskHandlerInterface{
 
         @Override
-        public void onCardClick(View v, NotesWithCategory notesData) {
+        public void onCardClick(View v, TaskEntity taskEntity) {
             CheckBox delete_checkbox = (CheckBox) v.findViewById(R.id.delete_checkbox);
             if(delete_checkbox.getVisibility() == View.VISIBLE){
                 delete_checkbox.setChecked(true);
             }else{
-
+                TaskViewModel taskViewModel = ViewModelProviders.of(getActivity()).get(TaskViewModel.class);
+                taskViewModel.setSelectedTaskId(taskEntity.getTask_id());
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, new TaskListFragment()).addToBackStack(null).commit();
             }
         }
 
