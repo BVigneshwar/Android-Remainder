@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="notesData" type="com.vignesh.remainder.NotesModule.NotesWithCategory" />
+        <variable name="notesDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +19,7 @@
             android:paddingBottom="5dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:text="Uncategorised"
+            android:text="@{notesDetail.category_name}"
             android:textAllCaps="false"
             android:textSize="12sp"
             android:background="@drawable/category_button"/>
@@ -31,6 +31,7 @@
             android:layout_marginTop="10dp"
             android:textSize="@dimen/font_size"
             android:textStyle="bold"
+            android:text="@{notesDetail.notes_name}"
             android:hint="@string/title"/>
 
         <TextView
@@ -39,8 +40,8 @@
             android:layout_height="match_parent"
             android:gravity="top"
             android:textSize="@dimen/font_size"
-            android:layout_marginTop="10dp"
-            android:hint="@string/notes"/>
+            android:text="@{notesDetail.notes_description}"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 </layout>

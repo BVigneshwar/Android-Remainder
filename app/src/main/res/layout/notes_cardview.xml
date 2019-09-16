@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="notesDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory"/>
+        <variable name="notesCardDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory"/>
         <variable name="notesHandler" type="com.vignesh.remainder.NotesModule.NotesFragment.NotesHandler" />
     </data>
     <RelativeLayout
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:onClick="@{(v) -> notesHandler.onCardClick(v, notesDetail)}"
+            android:onClick="@{(v) -> notesHandler.onCardClick(v, notesCardDetail)}"
             android:onLongClick="@{(v) -> notesHandler.onCardLongClick(v)}" >
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/transition_container"
@@ -54,7 +54,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:textSize="16sp"
-                                android:text="@{notesDetail.notes_name}"
+                                android:text="@{notesCardDetail.notes_name}"
                                 android:layout_toRightOf="@id/category_color"
                                 android:textColor="@color/black" />
 
@@ -68,7 +68,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="5dp"
                             android:textSize="14sp"
-                            android:text="@{notesDetail.notes_description}"
+                            android:text="@{notesCardDetail.notes_description}"
                             android:textColor="#000000" />
 
                     </RelativeLayout>
