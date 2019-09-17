@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;

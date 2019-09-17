@@ -1,4 +1,4 @@
-package com.vignesh.remainder.viewModel;
+package com.vignesh.remainder.viewmodel;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
-import com.vignesh.remainder.NotesModule.NotesWithCategory;
+import com.vignesh.remainder.notesmodule.NotesWithCategory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

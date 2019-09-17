@@ -1,5 +1,6 @@
 package com.vignesh.remainder.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -16,5 +17,5 @@ public interface TaskDAO {
     void insertTask(TaskEntity taskEntity);
 
     @Query("SELECT * FROM task_table")
-    MutableLiveData<List<TaskEntity>> getAllTask();
+    LiveData<List<TaskEntity>> getAllTask();
 }

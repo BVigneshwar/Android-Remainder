@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.CategoryEntity;
-import com.vignesh.remainder.viewModel.CategoryViewModel;
+import com.vignesh.remainder.viewmodel.CategoryViewModel;
 
 import java.util.List;
 

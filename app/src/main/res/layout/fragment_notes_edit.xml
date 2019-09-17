@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
     <data>
-        <variable name="notesDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory" />
+        <variable name="notesDetail" type="com.vignesh.remainder.notesmodule.NotesWithCategory" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="@dimen/font_size"
+            android:textSize="@dimen/normal_font_size"
             android:textStyle="bold"
             android:text="@={notesDetail.notes_name}"
             android:hint="@string/title"/>
@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:gravity="top"
-            android:textSize="@dimen/font_size"
+            android:textSize="@dimen/normal_font_size"
             android:text="@={notesDetail.notes_description}"
             android:hint="@string/notes"/>
 

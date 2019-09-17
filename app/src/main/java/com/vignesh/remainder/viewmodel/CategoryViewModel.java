@@ -1,4 +1,4 @@
-package com.vignesh.remainder.viewModel;
+package com.vignesh.remainder.viewmodel;
 
 import android.app.Application;
 
@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.vignesh.remainder.DAO.CategoryDAO;
-import com.vignesh.remainder.DAO.NotesDAO;
 import com.vignesh.remainder.database.NotesDatabase;
 import com.vignesh.remainder.entity.CategoryEntity;
 

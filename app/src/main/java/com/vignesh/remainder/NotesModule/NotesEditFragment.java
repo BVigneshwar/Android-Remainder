@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesEditBinding;
-import com.vignesh.remainder.viewModel.NotesViewModel;
+import com.vignesh.remainder.viewmodel.NotesViewModel;
 
 public class NotesEditFragment extends Fragment {
     TextView category_button;
@@ -83,9 +83,10 @@ public class NotesEditFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && data != null){
-             notesWithCategory.setCategory_id(data.getIntExtra("category_id", 0));
-             notesWithCategory.setCategory_name(data.getStringExtra("category_name"));
-             notesWithCategory.setCategory_color(data.getStringExtra("category_color"));
+            notesWithCategory.setCategory_id(data.getIntExtra("category_id", 0));
+            notesWithCategory.setCategory_name(data.getStringExtra("category_name"));
+            notesWithCategory.setCategory_color(data.getStringExtra("category_color"));
+            notesViewModel.setSelectedNotes(notesWithCategory);
         }
     }
 }

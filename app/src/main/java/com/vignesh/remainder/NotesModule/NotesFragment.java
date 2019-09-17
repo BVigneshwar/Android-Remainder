@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
 import com.vignesh.remainder.handler.NotesHandlerInterface;
-import com.vignesh.remainder.viewModel.NotesViewModel;
+import com.vignesh.remainder.viewmodel.NotesViewModel;
 
 import java.util.List;
 

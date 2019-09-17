@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="taskAdapter" type="com.vignesh.remainder.TaskModule.TaskAdapter" />
+        <variable name="taskAdapter" type="com.vignesh.remainder.taskmodule.TaskAdapter" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

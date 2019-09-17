@@ -1,4 +1,4 @@
-package com.vignesh.remainder.TaskModule;
+package com.vignesh.remainder.taskmodule;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.TaskListEntity;
-import com.vignesh.remainder.viewModel.TaskListViewModel;
-import com.vignesh.remainder.viewModel.TaskViewModel;
+import com.vignesh.remainder.viewmodel.TaskListViewModel;
+import com.vignesh.remainder.viewmodel.TaskViewModel;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -52,7 +52,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     @Override
     public void onBindViewHolder(@NonNull final NotesViewHolder holder, final int position) {
         final NotesWithCategory notes_data = notes_list.get(position);
-        holder.notesCardviewBinding.setNotesDetail(notes_data);
+        holder.notesCardviewBinding.setNotesCardDetail(notes_data);
         holder.notesCardviewBinding.setNotesHandler(notesHandler);
 
         if(notes_data.getCategory_color() != null){

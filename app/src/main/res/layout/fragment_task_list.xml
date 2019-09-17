@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskModule.TaskListFragment">
+    tools:context=".taskmodule.TaskListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_recycler_view"

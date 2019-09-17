@@ -1,4 +1,4 @@
-package com.vignesh.remainder.TaskModule;
+package com.vignesh.remainder.taskmodule;
 
 import android.content.Context;
 import android.view.LayoutInflater;

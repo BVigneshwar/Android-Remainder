@@ -1,4 +1,4 @@
-package com.vignesh.remainder.TaskModule;
+package com.vignesh.remainder.taskmodule;
 
 import android.os.Bundle;
 import android.transition.TransitionManager;
@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.TaskEntity;
 import com.vignesh.remainder.handler.TaskHandlerInterface;
-import com.vignesh.remainder.viewModel.TaskViewModel;
+import com.vignesh.remainder.viewmodel.TaskViewModel;
 
 import java.util.List;
 

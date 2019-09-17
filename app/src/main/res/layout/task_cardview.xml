@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="taskData" type="com.vignesh.remainder.entity.TaskEntity" />
-        <variable name="taskHandler" type="com.vignesh.remainder.TaskModule.TaskFragment.TaskHandler" />
+        <variable name="taskHandler" type="com.vignesh.remainder.taskmodule.TaskFragment.TaskHandler" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

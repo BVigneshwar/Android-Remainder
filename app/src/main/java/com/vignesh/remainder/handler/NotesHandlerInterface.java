@@ -2,7 +2,7 @@ package com.vignesh.remainder.handler;
 
 import android.view.View;
 
-import com.vignesh.remainder.NotesModule.NotesWithCategory;
+import com.vignesh.remainder.notesmodule.NotesWithCategory;
 
 public interface NotesHandlerInterface {
     void onCardClick(View v, NotesWithCategory notesData);

@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.vignesh.remainder.entity.NotesEntity;
-import com.vignesh.remainder.NotesModule.NotesWithCategory;
+import com.vignesh.remainder.notesmodule.NotesWithCategory;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="notesCardDetail" type="com.vignesh.remainder.NotesModule.NotesWithCategory"/>
-        <variable name="notesHandler" type="com.vignesh.remainder.NotesModule.NotesFragment.NotesHandler" />
+        <variable name="notesCardDetail" type="com.vignesh.remainder.notesmodule.NotesWithCategory"/>
+        <variable name="notesHandler" type="com.vignesh.remainder.notesmodule.NotesFragment.NotesHandler" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

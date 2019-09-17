@@ -1,4 +1,4 @@
-package com.vignesh.remainder.NotesModule;
+package com.vignesh.remainder.notesmodule;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.vignesh.remainder.AppConstants;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.CategoryEntity;
-import com.vignesh.remainder.viewModel.CategoryViewModel;
+import com.vignesh.remainder.viewmodel.CategoryViewModel;
 
 
 public class CategoryDialog {

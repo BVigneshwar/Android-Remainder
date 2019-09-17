@@ -1,9 +1,10 @@
-package com.vignesh.remainder.viewModel;
+package com.vignesh.remainder.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.vignesh.remainder.DAO.TaskDAO;
@@ -21,7 +22,7 @@ public class TaskViewModel extends AndroidViewModel {
         selected_task_id = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<TaskEntity>> getAllTask(){
+    public LiveData<List<TaskEntity>> getAllTask(){
         return taskDAO.getAllTask();
     }
 

@@ -1,11 +1,11 @@
-package com.vignesh.remainder.viewModel;
+package com.vignesh.remainder.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.room.RoomDatabase;
 
 import com.vignesh.remainder.DAO.TaskListDAO;
 import com.vignesh.remainder.database.NotesDatabase;
@@ -21,7 +21,7 @@ public class TaskListViewModel extends AndroidViewModel {
         taskListDAO = NotesDatabase.getNotesDatabase(application).taskListDAO();
     }
 
-    public MutableLiveData<List<TaskListEntity>> getAllTaskListFor(int task_id){
+    public LiveData<List<TaskListEntity>> getAllTaskListFor(int task_id){
         return taskListDAO.getAllTaskList(task_id);
     }
 }
