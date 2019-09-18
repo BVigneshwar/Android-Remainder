@@ -54,18 +54,19 @@ public class NotesViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<NotesWithCategory> getNewNotes(){
+        final NotesWithCategory newNotes = new NotesWithCategory();
+        newNotes.setNotes_id(-1);
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                NotesWithCategory newNotes = new NotesWithCategory();
                 CategoryEntity defaultCategory = categoryDAO.getDefaultCatgeory();
-                newNotes.setNotes_id(-1);
                 newNotes.setCategory_name(defaultCategory.getCategory_name());
                 newNotes.setCategory_id(defaultCategory.getCategory_id());
                 newNotes.setCategory_color(defaultCategory.getCategory_color());
                 selected_notes.postValue(newNotes);
             }
         });
+        selected_notes.setValue(newNotes);
         return selected_notes;
     }
 

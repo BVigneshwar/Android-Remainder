@@ -68,7 +68,7 @@ public class NotesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NotesEditFragment notesEditFragment = new NotesEditFragment();
-                NotesViewModel notesViewModel1 = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
+                NotesViewModel notesViewModel = ViewModelProviders.of(getActivity()).get(NotesViewModel.class);
                 notesViewModel.getNewNotes();
                 getFragmentManager().beginTransaction().replace(R.id.frame_layout, notesEditFragment).addToBackStack("notes_fragment").commit();
             }

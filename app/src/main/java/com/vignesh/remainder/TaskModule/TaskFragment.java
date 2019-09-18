@@ -44,16 +44,17 @@ public class TaskFragment extends Fragment {
                 taskAdapter.setTaskList(taskEntities);
             }
         });
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.delete_option, menu);
+        inflater.inflate(R.menu.add_option, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.delete_button){
+        if(item.getItemId() == R.id.add_icon){
             return true;
         }
         return super.onOptionsItemSelected(item);
