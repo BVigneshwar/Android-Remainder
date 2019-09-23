@@ -26,4 +26,7 @@ public interface NotesDAO {
     @Update
     void updateNotes(NotesEntity notesEntity);
 
+    @Query("SELECT * FROM notes_table WHERE notes_name =:name")
+    LiveData<NotesEntity> getSearchResultForNotes(String name);
+
 }

@@ -1,4 +1,4 @@
-package com.vignesh.remainder.handler;
+package com.vignesh.remainder.notesmodule;
 
 import android.content.Context;
 import android.content.Intent;

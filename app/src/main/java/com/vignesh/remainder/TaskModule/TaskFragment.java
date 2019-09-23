@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.entity.TaskEntity;
-import com.vignesh.remainder.handler.TaskHandlerInterface;
 import com.vignesh.remainder.viewmodel.TaskViewModel;
 
 import java.util.List;
@@ -60,9 +59,8 @@ public class TaskFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public class TaskHandler implements TaskHandlerInterface{
+    public class TaskHandler{
 
-        @Override
         public void onCardClick(View v, TaskEntity taskEntity) {
             CheckBox delete_checkbox = (CheckBox) v.findViewById(R.id.delete_checkbox);
             if(delete_checkbox.getVisibility() == View.VISIBLE){
@@ -74,7 +72,6 @@ public class TaskFragment extends Fragment {
             }
         }
 
-        @Override
         public boolean onCardLongClick(View v) {
             RecyclerView recyclerView = (RecyclerView)(v.getParent().getParent());
             TransitionManager.beginDelayedTransition(recyclerView);

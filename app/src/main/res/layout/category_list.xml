@@ -3,7 +3,7 @@
     <data>
         <variable name="categoryData" type="com.vignesh.remainder.entity.CategoryEntity" />
         <variable name="context" type="android.content.Context" />
-        <variable name="categoryHandler" type="com.vignesh.remainder.handler.CategoryHandler" />
+        <variable name="categoryHandler" type="com.vignesh.remainder.notesmodule.CategoryHandler" />
     </data>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"

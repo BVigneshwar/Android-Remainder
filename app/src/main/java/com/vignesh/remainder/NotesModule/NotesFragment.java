@@ -23,7 +23,6 @@ import android.widget.CheckBox;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
-import com.vignesh.remainder.handler.NotesHandlerInterface;
 import com.vignesh.remainder.viewmodel.NotesViewModel;
 
 import java.util.List;

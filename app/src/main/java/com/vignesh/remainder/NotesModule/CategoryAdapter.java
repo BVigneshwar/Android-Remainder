@@ -14,7 +14,6 @@ import com.vignesh.remainder.AppConstants;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.databinding.CategoryListBinding;
 import com.vignesh.remainder.entity.CategoryEntity;
-import com.vignesh.remainder.handler.CategoryHandler;
 
 import java.util.ArrayList;
 import java.util.List;
