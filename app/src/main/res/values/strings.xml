@@ -7,6 +7,11 @@
 
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="created_time">Created Time</string>
+    <string name="last_modified">Last Modified</string>
+    <string name="order">Order</string>
+    <string name="ascending_order">Ascending Order</string>
+    <string name="descending_order">Descending Order</string>
     <string name="add_category">Add Category</string>
     <string name="add">Add</string>
     <string name="save">Save</string>

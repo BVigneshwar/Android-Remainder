@@ -39,11 +39,12 @@ public class NotesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(false);
         notesHandler = new NotesHandler(this);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.delete_option, menu);
+        inflater.inflate(R.menu.main_menu_options, menu);
     }
 
     @Override
@@ -83,20 +84,21 @@ public class NotesFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.delete_button){
+        if(item.getItemId() == R.id.sort_by_option){
+            return true;
+        }else if(item.getItemId() == R.id.delete_option){
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public class NotesHandler implements NotesHandlerInterface{
+    public class NotesHandler{
         Fragment fragment;
 
         public NotesHandler(Fragment fragment){
             this.fragment = fragment;
         }
 
-        @Override
         public void onCardClick(View v, NotesWithCategory notesData) {
             CheckBox delete_checkbox = (CheckBox) v.findViewById(R.id.delete_checkbox);
             if(delete_checkbox.getVisibility() == View.VISIBLE){
@@ -109,7 +111,6 @@ public class NotesFragment extends Fragment {
             }
         }
 
-        @Override
         public boolean onCardLongClick(View v) {
             RecyclerView recyclerView = (RecyclerView)(v.getParent().getParent());
             TransitionManager.beginDelayedTransition(recyclerView);
@@ -120,7 +121,6 @@ public class NotesFragment extends Fragment {
                     checkBox.setVisibility(View.VISIBLE);
                 }
             }
-            setHasOptionsMenu(true);
             return true;
         }
     }
