@@ -19,9 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vignesh.remainder.R;
+import com.vignesh.remainder.common.SortHandler;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
 import com.vignesh.remainder.viewmodel.NotesViewModel;
 
@@ -45,6 +47,10 @@ public class NotesFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main_menu_options, menu);
+
+        //MenuItem search_menu = menu.findItem(R.id.search_option);
+        //SearchView searchView = (SearchView) search_menu.getActionView();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -85,8 +91,12 @@ public class NotesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.sort_by_option){
+            SortHandler sortByHandler = new SortHandler(getContext());
+            sortByHandler.createSortByDialog();
             return true;
-        }else if(item.getItemId() == R.id.delete_option){
+        }else if(item.getItemId() == R.id.delete_button){
+            return true;
+        } else if (item.getItemId() == R.id.search_option) {
             return true;
         }
         return super.onOptionsItemSelected(item);

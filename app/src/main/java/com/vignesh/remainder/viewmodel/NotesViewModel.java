@@ -37,7 +37,7 @@ public class NotesViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<NotesWithCategory>> getNotesWithCategory(){
-        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory();
+        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory("notes_name");
         return notes_list;
     }
 
