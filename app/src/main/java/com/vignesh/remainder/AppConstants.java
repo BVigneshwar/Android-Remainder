@@ -18,4 +18,6 @@ public class AppConstants {
         color_map.put("#795548", R.drawable.round_brown);
         color_map.put("#9e9e9e", R.drawable.round_grey);
     }
+    public static String shared_preference_key = "assistant_shared_preference";
+    public static String notes_sort_by_preference = "notes_sort_by_preference";
 }

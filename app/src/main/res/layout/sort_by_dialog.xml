@@ -12,16 +12,22 @@
             android:id="@+id/sort_by_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/normal_text"
+            android:padding="10dp"
             android:text="@string/title"/>
         <RadioButton
             android:id="@+id/sort_by_created_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/normal_text"
+            android:padding="10dp"
             android:text="@string/created_time"/>
         <RadioButton
             android:id="@+id/sort_by_last_modified"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/normal_text"
+            android:padding="10dp"
             android:text="@string/last_modified"/>
     </RadioGroup>
     <TextView
@@ -31,7 +37,8 @@
         android:layout_below="@id/sort_by_criteria_group"
         android:text="@string/order"
         android:layout_centerHorizontal="true"
-        style="@style/normal_text">
+        android:padding="10dp"
+        style="@style/bold_text">
 
     </TextView>
     <RadioGroup
@@ -43,11 +50,15 @@
             android:id="@+id/sort_by_ascending_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/normal_text"
+            android:padding="10dp"
             android:text="@string/ascending_order"/>
         <RadioButton
             android:id="@+id/sort_by_descending_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/normal_text"
+            android:padding="10dp"
             android:text="@string/descending_order"/>
     </RadioGroup>
     <LinearLayout

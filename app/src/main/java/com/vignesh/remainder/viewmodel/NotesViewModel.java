@@ -1,6 +1,7 @@
 package com.vignesh.remainder.viewmodel;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -36,8 +37,8 @@ public class NotesViewModel extends AndroidViewModel {
         selected_notes = new MutableLiveData<>();
     }
 
-    public LiveData<List<NotesWithCategory>> getNotesWithCategory(){
-        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory("notes_name");
+    public LiveData<List<NotesWithCategory>> getNotesWithCategory(String sort_by){
+        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory(sort_by);
         return notes_list;
     }
 
