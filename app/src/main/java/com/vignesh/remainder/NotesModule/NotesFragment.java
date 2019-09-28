@@ -1,6 +1,8 @@
 package com.vignesh.remainder.notesmodule;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,27 +21,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.vignesh.remainder.AppConstants;
 import com.vignesh.remainder.R;
 import com.vignesh.remainder.common.SortHandler;
+import com.vignesh.remainder.common.SortInterface;
 import com.vignesh.remainder.databinding.FragmentNotesBinding;
 import com.vignesh.remainder.viewmodel.NotesViewModel;
 
 import java.util.List;
 
 
-public class NotesFragment extends Fragment {
+public class NotesFragment extends Fragment implements SortInterface {
     FragmentNotesBinding binding;
     RecyclerView recyclerView;
     FloatingActionButton add_notes_btn;
     NotesFragment.NotesHandler notesHandler;
+    NotesAdapter notesAdapter;
+    SortHandler sortByHandler;
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(false);
         notesHandler = new NotesHandler(this);
         setHasOptionsMenu(true);
     }
@@ -47,9 +54,6 @@ public class NotesFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main_menu_options, menu);
-
-        //MenuItem search_menu = menu.findItem(R.id.search_option);
-        //SearchView searchView = (SearchView) search_menu.getActionView();
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -58,10 +62,12 @@ public class NotesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         add_notes_btn = (FloatingActionButton) view.findViewById(R.id.add_notes_button);
 
-        final NotesAdapter notesAdapter = new NotesAdapter(getContext(), notesHandler);
+        notesAdapter = new NotesAdapter(getContext(), notesHandler);
 
+        sharedPreferences = getActivity().getSharedPreferences(AppConstants.shared_preference_key, Context.MODE_PRIVATE);
+        String sort_by = sharedPreferences.getString(AppConstants.notes_sort_by_preference, "notes_name asc");
         final NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
-        notesViewModel.getNotesWithCategory().observe(this, new Observer<List<NotesWithCategory>>() {
+        notesViewModel.getNotesWithCategory(sort_by).observe(this, new Observer<List<NotesWithCategory>>() {
             @Override
             public void onChanged(List<NotesWithCategory> notes) {
                 notesAdapter.setNotes(notes);
@@ -91,7 +97,7 @@ public class NotesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.sort_by_option){
-            SortHandler sortByHandler = new SortHandler(getContext());
+            sortByHandler = new SortHandler(getContext(), new String[]{getResources().getString(R.string.title), getResources().getString(R.string.created_time), getResources().getString(R.string.last_modified)}, this);
             sortByHandler.createSortByDialog();
             return true;
         }else if(item.getItemId() == R.id.delete_button){
@@ -100,6 +106,16 @@ public class NotesFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSortBySaveButtonClick() {
+        String order = sortByHandler.getSelectedSortOrder();
+        String sort_by = sortByHandler.getSelectedSortBy();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.notes_sort_by_preference, sort_by+" "+order);
+        editor.commit();
+        notesAdapter.notifyDataSetChanged();
     }
 
     public class NotesHandler{

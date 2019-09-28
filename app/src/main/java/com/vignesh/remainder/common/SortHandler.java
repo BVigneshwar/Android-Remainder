@@ -5,17 +5,22 @@ import android.content.Context;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.vignesh.remainder.R;
 
-public class SortHandler implements RadioGroup.OnCheckedChangeListener{
+public class SortHandler{
     Context context;
+    String sort_by_array[];
+    SortInterface sortInterface;
     Dialog sort_by_dialog;
-    String sort_by, order;
+    String selected_sort_order, selected_sort_by;
 
-    public SortHandler(Context context){
+    public SortHandler(Context context, String sort_by_array[], SortInterface sortInterface){
         this.context = context;
+        this.sortInterface = sortInterface;
+        this.sort_by_array = sort_by_array;
     }
     public void createSortByDialog(){
         sort_by_dialog = new Dialog(context, R.style.dialog_style);
@@ -33,9 +38,18 @@ public class SortHandler implements RadioGroup.OnCheckedChangeListener{
         RadioGroup sort_by_radiogroup = (RadioGroup) sort_by_dialog.findViewById(R.id.sort_by_criteria_group);
         RadioGroup order_radiogroup = (RadioGroup) sort_by_dialog.findViewById(R.id.sort_by_order_group);
 
+        for(int index=0; index<sort_by_array.length; index++){
+            RadioButton radioButton = new RadioButton(context);
+            radioButton.setText(sort_by_array[index]);
+            radioButton.setPadding(10, 10, 10, 10);
+            radioButton.setTextAppearance(R.style.normal_text);
+            sort_by_radiogroup.addView(radioButton);
+        }
+
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sortInterface.onSortBySaveButtonClick();
                 sort_by_dialog.cancel();
             }
         });
@@ -47,26 +61,31 @@ public class SortHandler implements RadioGroup.OnCheckedChangeListener{
             }
         });
 
-        sort_by_radiogroup.setOnCheckedChangeListener(this);
-        order_radiogroup.setOnCheckedChangeListener(this);
+        sort_by_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = sort_by_dialog.findViewById(checkedId);
+                selected_sort_by = radioButton.getText().toString();
+            }
+        });
+
+        order_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.sort_by_ascending_order){
+                    selected_sort_order = "ASC";
+                }else if(checkedId == R.id.sort_by_descending_order){
+                    selected_sort_order = "DESC";
+                }
+            }
+        });
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if(group.getId() == R.id.sort_by_criteria_group){
-            if(checkedId == R.id.sort_by_title){
+    public String getSelectedSortOrder(){
+        return selected_sort_order;
+    }
 
-            }else if(checkedId == R.id.sort_by_created_time){
-
-            }else if(checkedId == R.id.sort_by_last_modified){
-
-            }
-        }else if(group.getId() == R.id.sort_by_order_group){
-            if(checkedId == R.id.sort_by_ascending_order){
-
-            }else if(checkedId == R.id.sort_by_descending_order){
-
-            }
-        }
+    public String getSelectedSortBy(){
+        return selected_sort_by;
     }
 }

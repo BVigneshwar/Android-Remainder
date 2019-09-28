@@ -8,27 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sort_by_criteria_group">
-        <RadioButton
-            android:id="@+id/sort_by_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/normal_text"
-            android:padding="10dp"
-            android:text="@string/title"/>
-        <RadioButton
-            android:id="@+id/sort_by_created_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/normal_text"
-            android:padding="10dp"
-            android:text="@string/created_time"/>
-        <RadioButton
-            android:id="@+id/sort_by_last_modified"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/normal_text"
-            android:padding="10dp"
-            android:text="@string/last_modified"/>
     </RadioGroup>
     <TextView
         android:id="@+id/order_textview"
