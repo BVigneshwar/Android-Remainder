@@ -22,7 +22,10 @@ public class SortHandler{
         this.sortInterface = sortInterface;
         this.sort_by_array = sort_by_array;
     }
-    public void createSortByDialog(){
+    public void createSortByDialog(String sort_by, String order){
+        this.selected_sort_by = sort_by;
+        this.selected_sort_order = order;
+
         sort_by_dialog = new Dialog(context, R.style.dialog_style);
         sort_by_dialog.setContentView(R.layout.sort_by_dialog);
         sort_by_dialog.setTitle(context.getResources().getString(R.string.sort_by));
@@ -41,9 +44,21 @@ public class SortHandler{
         for(int index=0; index<sort_by_array.length; index++){
             RadioButton radioButton = new RadioButton(context);
             radioButton.setText(sort_by_array[index]);
+            radioButton.setLayoutParams(new RadioGroup.LayoutParams(
+                    RadioGroup.LayoutParams.MATCH_PARENT,
+                    RadioGroup.LayoutParams.WRAP_CONTENT));
             radioButton.setPadding(10, 10, 10, 10);
             radioButton.setTextAppearance(R.style.normal_text);
+            if(sort_by_array[index].equals(selected_sort_by)){
+                radioButton.setChecked(true);
+            }
             sort_by_radiogroup.addView(radioButton);
+        }
+
+        if(selected_sort_order.equals("ASC")){
+            ((RadioButton)sort_by_dialog.findViewById(R.id.sort_by_ascending_order)).setChecked(true);
+        }else if(selected_sort_order.equals("DESC")){
+            ((RadioButton)sort_by_dialog.findViewById(R.id.sort_by_descending_order)).setChecked(true);
         }
 
         save_button.setOnClickListener(new View.OnClickListener() {
