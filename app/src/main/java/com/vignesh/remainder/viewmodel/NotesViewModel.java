@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.vignesh.remainder.DAO.CategoryDAO;
 import com.vignesh.remainder.DAO.NotesDAO;
@@ -38,7 +39,8 @@ public class NotesViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<NotesWithCategory>> getNotesWithCategory(String sort_by){
-        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory(sort_by);
+        String query = "SELECT notes_table.notes_id, notes_table.notes_name, notes_table.notes_description, notes_table.category_id, notes_table.created_time, notes_table.last_modified, category_table.category_name, category_table.category_color FROM notes_table JOIN category_table ON notes_table.category_id = category_table.category_id ORDER BY "+sort_by;
+        LiveData<List<NotesWithCategory>> notes_list = notesDAO.getAllNotesWithCategory(new SimpleSQLiteQuery(query));
         return notes_list;
     }
 

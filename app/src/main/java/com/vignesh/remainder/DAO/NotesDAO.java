@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
+import com.vignesh.remainder.entity.CategoryEntity;
 import com.vignesh.remainder.entity.NotesEntity;
 import com.vignesh.remainder.notesmodule.NotesWithCategory;
 
@@ -29,4 +32,6 @@ public interface NotesDAO {
     @Query("SELECT * FROM notes_table WHERE notes_name =:name")
     LiveData<NotesEntity> getSearchResultForNotes(String name);
 
+    @RawQuery(observedEntities = {NotesEntity.class, CategoryEntity.class})
+    LiveData<List<NotesWithCategory>> getAllNotesWithCategory(SupportSQLiteQuery sortQuery);
 }

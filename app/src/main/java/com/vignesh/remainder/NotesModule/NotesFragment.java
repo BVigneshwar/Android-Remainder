@@ -1,6 +1,5 @@
 package com.vignesh.remainder.notesmodule;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vignesh.remainder.AppConstants;
 import com.vignesh.remainder.R;
@@ -37,12 +37,12 @@ import java.util.List;
 
 public class NotesFragment extends Fragment implements SortInterface {
     FragmentNotesBinding binding;
-    RecyclerView recyclerView;
     FloatingActionButton add_notes_btn;
     NotesFragment.NotesHandler notesHandler;
     NotesAdapter notesAdapter;
     SortHandler sortByHandler;
     SharedPreferences sharedPreferences;
+    String sort_by_shared_preference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,9 +65,9 @@ public class NotesFragment extends Fragment implements SortInterface {
         notesAdapter = new NotesAdapter(getContext(), notesHandler);
 
         sharedPreferences = getActivity().getSharedPreferences(AppConstants.shared_preference_key, Context.MODE_PRIVATE);
-        String sort_by = sharedPreferences.getString(AppConstants.notes_sort_by_preference, "notes_name asc");
+        sort_by_shared_preference = sharedPreferences.getString(AppConstants.notes_sort_by_preference, "notes_name asc");
         final NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
-        notesViewModel.getNotesWithCategory(sort_by).observe(this, new Observer<List<NotesWithCategory>>() {
+        notesViewModel.getNotesWithCategory(sort_by_shared_preference).observe(this, new Observer<List<NotesWithCategory>>() {
             @Override
             public void onChanged(List<NotesWithCategory> notes) {
                 notesAdapter.setNotes(notes);
@@ -98,11 +98,21 @@ public class NotesFragment extends Fragment implements SortInterface {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.sort_by_option){
             sortByHandler = new SortHandler(getContext(), new String[]{getResources().getString(R.string.title), getResources().getString(R.string.created_time), getResources().getString(R.string.last_modified)}, this);
-            sortByHandler.createSortByDialog();
+            String[] sort = sort_by_shared_preference.split(" ");
+            if(sort[0].equals("notes_name")){
+                sort[0] = getResources().getString(R.string.title);
+            }else if(sort[0].equals("created_time")){
+                sort[0] = getResources().getString(R.string.created_time);
+            }else if(sort[0].equals("last_modified")){
+                sort[0] = getResources().getString(R.string.last_modified);
+            }
+            sortByHandler.createSortByDialog(sort[0], sort[1]);
             return true;
-        }else if(item.getItemId() == R.id.delete_button){
+        }else if(item.getItemId() == R.id.delete_option){
+            View v = this.getView();
+            v.findViewById(R.id.notes_cardview).performLongClick();
             return true;
-        } else if (item.getItemId() == R.id.search_option) {
+        } else if (item.getItemId() == R.id.search_option){
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -112,9 +122,23 @@ public class NotesFragment extends Fragment implements SortInterface {
     public void onSortBySaveButtonClick() {
         String order = sortByHandler.getSelectedSortOrder();
         String sort_by = sortByHandler.getSelectedSortBy();
+        if(sort_by.equals(getResources().getString(R.string.title))){
+            sort_by = "notes_name";
+        }else if(sort_by.equals(getResources().getString(R.string.created_time))){
+            sort_by = "created_time";
+        }else if(sort_by.equals(getResources().getString(R.string.last_modified))){
+            sort_by = "last_modified";
+        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(AppConstants.notes_sort_by_preference, sort_by+" "+order);
         editor.commit();
+        NotesViewModel notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
+        notesViewModel.getNotesWithCategory(sort_by+" "+order).observe(this, new Observer<List<NotesWithCategory>>() {
+            @Override
+            public void onChanged(List<NotesWithCategory> notes) {
+                notesAdapter.setNotes(notes);
+            }
+        });
         notesAdapter.notifyDataSetChanged();
     }
 
@@ -147,8 +171,9 @@ public class NotesFragment extends Fragment implements SortInterface {
                     checkBox.setVisibility(View.VISIBLE);
                 }
             }
+            BottomNavigationView bottomNavigationView = v.getRootView().findViewById(R.id.bottom_nav);
+            bottomNavigationView.setVisibility(View.GONE);
             return true;
         }
     }
-
 }
