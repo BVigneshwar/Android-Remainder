@@ -40,21 +40,17 @@ public class SortHandler{
         Button cancel_button = (Button)sort_by_dialog.findViewById(R.id.cancel_button);
         RadioGroup sort_by_radiogroup = (RadioGroup) sort_by_dialog.findViewById(R.id.sort_by_criteria_group);
         RadioGroup order_radiogroup = (RadioGroup) sort_by_dialog.findViewById(R.id.sort_by_order_group);
-
+        int paddingPixel = CommonUtil.convertDpToPixel(10, context);
         for(int index=0; index<sort_by_array.length; index++){
             RadioButton radioButton = new RadioButton(context);
             radioButton.setText(sort_by_array[index]);
-            radioButton.setLayoutParams(new RadioGroup.LayoutParams(
-                    RadioGroup.LayoutParams.MATCH_PARENT,
-                    RadioGroup.LayoutParams.WRAP_CONTENT));
-            radioButton.setPadding(10, 10, 10, 10);
             radioButton.setTextAppearance(R.style.normal_text);
-            if(sort_by_array[index].equals(selected_sort_by)){
-                radioButton.setChecked(true);
-            }
+            radioButton.setPadding(paddingPixel, paddingPixel, paddingPixel, paddingPixel);
             sort_by_radiogroup.addView(radioButton);
+            if(sort_by_array[index].equals(selected_sort_by)){
+                ((RadioButton)sort_by_radiogroup.getChildAt(index)).setChecked(true);
+            }
         }
-
         if(selected_sort_order.equals("ASC")){
             ((RadioButton)sort_by_dialog.findViewById(R.id.sort_by_ascending_order)).setChecked(true);
         }else if(selected_sort_order.equals("DESC")){
